@@ -1,0 +1,26 @@
+/* If set, will hide the login form so you can only see the "Login through myBama" button */
+#loginform {
+	padding: 0;
+	}
+
+/* Hide specific elements */
+#loginform p {
+	display: none !important;
+	visibility: hidden !important;
+	}
+	
+/* Tweak the button a little */
+#ua-mybama-cas-auth-login-form-mybama-button {
+	margin: 0;
+	}
+	
+/* Center the nav */
+#nav,
+#backtoblog {
+	text-align: center;
+	}
+	
+/* Decrease the space above the back to blog link */
+#backtoblog {
+	margin: 14px 0 0 0;
+	}

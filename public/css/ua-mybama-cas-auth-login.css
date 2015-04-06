@@ -1,0 +1,30 @@
+/* Style the login through myBama button on the login form */
+#ua-mybama-cas-auth-login-form-mybama-button {
+	display: block;
+	background: #900;
+	background-repeat: no-repeat;
+	width: 100%;
+	height: auto;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	box-shadow: none;
+	border: 0;
+	margin: 0 0 20px 0;
+	padding: 8px 12px;
+	color: #fff;
+	text-align: center;
+	font-weight: bold;
+	text-decoration: none;
+	cursor: pointer;
+	font-size: 1.1em;
+	line-height: 1.3em;
+	vertical-align: middle;
+	}
+	
+#ua-mybama-cas-auth-login-form-mybama-button:hover {
+	background-color: #750000;
+	}

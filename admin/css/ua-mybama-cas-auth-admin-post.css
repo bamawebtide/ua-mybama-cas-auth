@@ -1,0 +1,48 @@
+/* Hide these elements */
+.hide {
+	display: none;
+	}
+
+/* We need to shove these meta box wrappers down a bit */
+#ua-mybama-cas-auth-after-title-sortables {
+	margin-top: 20px;
+	margin-bottom: -10px;
+	}
+
+/* Clear out the floats */
+#ua-mybama-cas-auth-mybama-cas-authentication .inside,
+#ua-mybama-cas-auth-wordpress-authentication .inside {
+    overflow: auto;
+}
+	
+/* Decrease the top and bottom paragraph margin in this meta box */
+#ua-mybama-cas-auth-mybama-cas-authentication p,
+#ua-mybama-cas-auth-wordpress-authentication p {
+	margin: 0.2em 0 0.6em 0;
+	}
+
+/* When there's one fieldset */
+.ua-mybama-cas-auth-side-by-side-fieldsets fieldset {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* Make sure the select stays inside */
+.ua-mybama-cas-auth-side-by-side-fieldsets select {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* When there are two, put these fieldsets side by side */
+.ua-mybama-cas-auth-side-by-side-fieldsets.two fieldset {
+    float: left;
+    width: 50%;
+    padding: 0 0 0 10px;
+}
+
+/* Adjust the first one */
+.ua-mybama-cas-auth-side-by-side-fieldsets.two fieldset:first-child {
+    padding: 0 10px 0 0;
+}

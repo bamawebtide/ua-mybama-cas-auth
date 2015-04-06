@@ -1,0 +1,225 @@
+.red {
+	color: #990000;
+	}
+	
+.red-bg {
+	background: #990000;
+	color: #fff;
+	}
+
+/* Customize the save buttons */
+#save-ua-mybama-cas-auth-settings,
+#save-ua-mybama-cas-auth-settings-mb {
+	display: block;
+	background-color: #0074a2 !important;
+	width: 100%;
+	height: auto;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	background-repeat: no-repeat;
+	padding: 8px 12px !important;
+	border: 0;
+	margin: 0;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	color: #fff !important;
+	text-align: center;
+	font-weight: bold;
+	text-decoration: none;
+	cursor: pointer;
+	font-size: 1.1em;
+	line-height: 1.3em;
+	box-shadow: none !important;
+	vertical-align: middle;
+	}
+
+#save-ua-mybama-cas-auth-settings-mb {
+	margin: 10px 0 0 0;
+	}
+	
+/* Tweak the form */
+.form-table {
+	margin: 0;
+	}
+	
+.form-table th,
+.form-table td {
+	padding-top: 10px;
+	}
+	
+.form-table td p:first-child {
+	margin-top: 0;
+	}
+	
+.form-table td ul:last-child {
+	margin-bottom: 0;
+	}
+	
+/* Add some space between paragraphs */
+.form-table td p + p,
+.form-table td p + table {
+	margin-top: 12px;
+	}
+	
+/* Tweak the fields and field labels */
+.ua-mybama-cas-auth-field-label {
+	font-size: 13px !important;
+	line-height: 1.5 !important;
+	margin-bottom: 0 !important;
+	}
+	
+h4.ua-mybama-cas-auth-field-label {
+	font-size: 14px !important;
+	color: #222;
+	}
+	
+h4.ua-mybama-cas-auth-field-label:first-child {
+	margin-top: 0;
+	}
+	
+th.ua-mybama-cas-auth-field-label {
+	width: 90px;
+	padding-top: 12px !important;
+	}
+	
+p.ua-mybama-cas-auth-field {
+	line-height: 1.7 !important;
+	margin-top: 8px !important;
+	margin-bottom: 0.7em !important;
+	}
+	
+p.ua-mybama-cas-auth-field.indent {
+	padding-left: 15px;
+	}
+	
+.ua-mybama-cas-auth-field input[type="text"] {
+	width: 100%;
+	}
+	
+.ua-mybama-cas-auth-field.checkboxes label {
+	display: inline-block;
+	margin-right: 15px !important;
+	margin-bottom:  0 !important;
+	}
+	
+ul.ua-mybama-cas-auth-shortcode-settings,
+ul.ua-mybama-cas-auth-shortcode-settings ul {
+	list-style: outside;
+	margin-left: 35px;
+	line-height: 1.4;
+	}
+	
+ul.ua-mybama-cas-auth-shortcode-settings ul {
+	margin-top: 3px;
+	list-style: circle;
+	}
+	
+/* Stylize the host settings tables */
+fieldset#enable-test-mode-setting {
+	background: rgba( 255, 0, 0, 0.1 );
+	padding: 10px 17px 13px 17px;
+	margin-bottom: 10px;
+	}
+	
+fieldset#enable-test-mode-setting p.ua-mybama-cas-auth-field {
+	font-weight: bold !important;
+	margin-bottom: 3px !important;
+	}
+	
+#ua-mybama-cas-auth-host-settings td.ua-mybama-cas-auth-host-fields {
+	width: 50%;
+	padding: 0 15px 10px 0;
+	vertical-align: top;
+	}
+	
+#ua-mybama-cas-auth-host-settings .inside {
+	padding-top: 6px;
+	}
+	
+/* Scoot the headers over to the left and decrease vertical space */
+#ua-mybama-cas-auth-host-settings .inside h3 {
+	padding-left: 0;
+	padding-right: 0;
+	line-height: 0.7;
+	}
+	
+/* Tweak the subtable */
+#ua-mybama-cas-auth-host-settings td.ua-mybama-cas-auth-host-fields table {
+	margin: 0;
+	}
+	
+#ua-mybama-cas-auth-host-settings td.ua-mybama-cas-auth-host-fields th,
+#ua-mybama-cas-auth-host-settings td.ua-mybama-cas-auth-host-fields td {
+	vertical-align: top;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	}
+
+/* Give some more space in the inside */
+#ua-mybama-cas-auth-content-settings .inside,
+#ua-mybama-cas-auth-user-settings .inside,
+#ua-mybama-cas-auth-single-sign-on-settings .inside {
+	padding-top: 1px;
+	padding-bottom: 14px;
+	}
+		
+/* Scoot the headers over to the left and decrease vertical space */
+#ua-mybama-cas-auth-user-settings .inside h3,
+#ua-mybama-cas-auth-single-sign-on-settings .inside h3 {
+	padding-left: 0;
+	padding-right: 0;
+	line-height: 0.7;
+	}
+	
+/* Stylize the white and blacklist tables */
+#ua-mybama-cas-auth-user-settings td.white-list,
+#ua-mybama-cas-auth-single-sign-on-settings td.white-list,
+#ua-mybama-cas-auth-user-settings td.black-list,
+#ua-mybama-cas-auth-single-sign-on-settings td.black-list {
+	width: 50%;
+	background: rgba( 0, 255, 0, 0.2 );
+	padding: 10px 15px;
+	vertical-align: top;
+	}
+	
+/* Make the blacklist red */
+#ua-mybama-cas-auth-user-settings td.black-list,
+#ua-mybama-cas-auth-single-sign-on-settings td.black-list {
+	background: rgba( 255, 0, 0, 0.2 );
+	}
+	
+#ua-mybama-cas-auth-user-settings td.header-instructions,
+#ua-mybama-cas-auth-single-sign-on-settings td.header-instructions {
+	padding-bottom: 0;
+	}
+
+/* Adjust the paragraphs */
+#ua-mybama-cas-auth-user-settings td.header-instructions p,
+#ua-mybama-cas-auth-single-sign-on-settings td.header-instructions p {
+	margin-top: 0;
+	margin-bottom: 12px;
+	}
+	
+#ua-mybama-cas-auth-user-settings td.header-instructions p.instructions,
+#ua-mybama-cas-auth-single-sign-on-settings td.header-instructions p.instructions {
+	color: #222;
+	font-weight: bold;
+	font-style: italic;
+	}
+	
+#ua-mybama-cas-auth-user-settings td.textarea,
+#ua-mybama-cas-auth-single-sign-on-settings td.textarea {
+	padding-top: 0;
+	}
+	
+#ua-mybama-cas-auth-user-settings td.white-list .white-list-color,
+#ua-mybama-cas-auth-single-sign-on-settings td.white-list .white-list-color {
+	color: rgba( 0, 121, 0, 1 );
+	}
+	
+#ua-mybama-cas-auth-user-settings td.black-list .black-list-color,
+#ua-mybama-cas-auth-single-sign-on-settings td.black-list .black-list-color {
+	color: rgba( 148, 0, 0, 1 );
+	}
