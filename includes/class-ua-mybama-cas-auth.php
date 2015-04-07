@@ -1405,6 +1405,9 @@ class UA_myBama_CAS_Auth {
 		// Add plugin action links
 		$this->loader->add_filter( 'plugin_action_links_ua-mybama-cas-auth/ua-mybama-cas-auth.php', $plugin_admin, 'add_plugin_action_links', 10, 4 );
 
+		// Check for the plugin update
+		$this->loader->add_filter( 'site_transient_update_plugins', $plugin_admin, 'check_for_plugin_update', 100 );
+
 	}
 
 	/**

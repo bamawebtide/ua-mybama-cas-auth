@@ -1264,4 +1264,43 @@ class UA_myBama_CAS_Auth_Admin {
 		
 	}
 
+	/**
+	 * Because this plugin doesn't live in the WordPress.org repo,
+	 * we have to manually check to see if the plugin has an update
+	 * from the WebTide website. The plugin is currently hosted
+	 * on GitHub.
+	 *
+	 * @since 	1.0.0
+	 * @param	$plugins_info - an array of plugin info
+	 * @return 	array - the plugin info info after it has been filtered
+	 */
+	public function check_for_plugin_update( $plugins_info ) {
+
+		// Make sure we have checked info which contains the current version
+		if ( ! ( $current_version = isset( $plugins_info->checked ) && isset( $plugins_info->checked ) && isset( $plugins_info->checked[ $this->plugin_file ] ) ? $plugins_info->checked[ $this->plugin_file ] : false ) )
+			return $plugins_info;
+
+		// Create the remote URL
+		if ( ! ( $remote_url = add_query_arg( array( 'get_wp_plugin_update_response' => $this->plugin_id, 'current_version' => $this->version ), 'https://webtide.ua.edu/' ) ) )
+			return $plugins_info;
+
+		// Get the response body
+		if ( ( $response = wp_remote_get( $remote_url ) ) && ! is_wp_error( $response )
+			&& ( $response_body = json_decode( wp_remote_retrieve_body( $response ) ) ) ) {
+
+			// If we have a response, add to the info
+			if ( ( $new_version = isset( $response_body->new_version ) ? $response_body->new_version : false )
+				&& floatval( $new_version ) > floatval( $this->version ) ) {
+
+				// Add to plugins info
+				$plugins_info->response[ $this->plugin_file ] = $response_body;
+
+			}
+
+		}
+
+		return $plugins_info;
+
+	}
+
 }
