@@ -83,6 +83,15 @@ class UA_myBama_CAS_Auth_Admin {
 	private $added_meta_boxes;
 
 	/**
+	 * Will hold the update response so we don't have to request it multiple times.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      object    $update_response    Holds the update response
+	 */
+	private $update_response;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -1276,6 +1285,17 @@ class UA_myBama_CAS_Auth_Admin {
 	 */
 	public function check_for_plugin_update( $plugins_info ) {
 
+		// See if we already have the update response
+		if ( isset( $this->update_response ) && ! empty( $this->update_response ) ) {
+
+			// Add to plugins info
+			$plugins_info->response[ $this->plugin_file ] = $this->update_response;
+
+			// Get out of here
+			return $plugins_info;
+
+		}
+
 		// Make sure we have checked info which contains the current version
 		if ( ! ( $current_version = isset( $plugins_info->checked ) && isset( $plugins_info->checked ) && isset( $plugins_info->checked[ $this->plugin_file ] ) ? $plugins_info->checked[ $this->plugin_file ] : false ) )
 			return $plugins_info;
@@ -1292,8 +1312,11 @@ class UA_myBama_CAS_Auth_Admin {
 			if ( ( $new_version = isset( $response_body->new_version ) ? $response_body->new_version : false )
 				&& floatval( $new_version ) > floatval( $this->version ) ) {
 
-				// Add to plugins info
-				$plugins_info->response[ $this->plugin_file ] = $response_body;
+				// Store the response
+				$this->update_response = $response_body;
+
+				// Add the response to the plugins info
+				$plugins_info->response[ $this->plugin_file ] = $this->update_response;
 
 			}
 
