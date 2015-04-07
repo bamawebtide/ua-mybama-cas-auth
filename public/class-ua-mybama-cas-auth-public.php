@@ -27,9 +27,9 @@ class UA_myBama_CAS_Auth_Public {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $ua_mybama_cas_auth_id    The ID of this plugin.
+	 * @var      string    $plugin_id    The ID of this plugin.
 	 */
-	private $ua_mybama_cas_auth_id;
+	private $plugin_id;
 
 	/**
 	 * The version of this plugin.
@@ -44,12 +44,12 @@ class UA_myBama_CAS_Auth_Public {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @var      string    $ua_mybama_cas_auth_id	The ID of the plugin.
+	 * @var      string    $plugin_id	The ID of the plugin.
 	 * @var      string    $version    The version of this plugin.
 	 */
-	public function __construct( $ua_mybama_cas_auth_id, $version ) {
+	public function __construct( $plugin_id, $version ) {
 
-		$this->ua_mybama_cas_auth_id = $ua_mybama_cas_auth_id;
+		$this->plugin_id = $plugin_id;
 		$this->version = $version;
 
 	}
@@ -101,7 +101,7 @@ class UA_myBama_CAS_Auth_Public {
 			return;
 		
 		// Enqueue the login stylesheet
-		wp_enqueue_style( "{$this->ua_mybama_cas_auth_id}-login", plugin_dir_url( dirname( __FILE__ ) ) . 'public/css/ua-mybama-cas-auth-login.css', array(), $this->version, 'all' );
+		wp_enqueue_style( "{$this->plugin_id}-login", plugin_dir_url( dirname( __FILE__ ) ) . 'public/css/ua-mybama-cas-auth-login.css', array(), $this->version, 'all' );
 		
 		// Get the setting
 		$hide_wp_login_form = $ua_mybama_cas_auth->get_setting( 'sso_hide_wordpress_login_form' );
@@ -111,7 +111,7 @@ class UA_myBama_CAS_Auth_Public {
 			return;
 			
 		// Enqueue the stylesheet that hides the WordPress login elements
-		wp_enqueue_style( "{$this->ua_mybama_cas_auth_id}-hide-login-form", plugin_dir_url( dirname( __FILE__ ) ) . 'public/css/ua-mybama-cas-auth-hide-login-form.css', array(), $this->version, 'all' );
+		wp_enqueue_style( "{$this->plugin_id}-hide-login-form", plugin_dir_url( dirname( __FILE__ ) ) . 'public/css/ua-mybama-cas-auth-hide-login-form.css', array(), $this->version, 'all' );
 		
 	}
 	

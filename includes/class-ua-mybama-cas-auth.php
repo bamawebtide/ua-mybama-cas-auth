@@ -44,9 +44,18 @@ class UA_myBama_CAS_Auth {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      string    $ua_mybama_cas_auth_id    The string used to uniquely identify this plugin.
+	 * @var      string    $plugin_id    The string used to uniquely identify this plugin.
 	 */
-	protected $ua_mybama_cas_auth_id;
+	protected $plugin_id;
+
+	/**
+	 * The path to the plugin's main file.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      string    $plugin_file    The path to the plugin's main file.
+	 */
+	protected $plugin_file;
 
 	/**
 	 * The current version of the plugin.
@@ -119,7 +128,8 @@ class UA_myBama_CAS_Auth {
 	public function __construct() {
 
 		// Set some plugin information
-		$this->ua_mybama_cas_auth_id = 'ua-mybama-cas-auth';
+		$this->plugin_id = 'ua-mybama-cas-auth';
+		$this->plugin_file = 'ua-mybama-cas-auth/ua-mybama-cas-auth.php';
 		$this->version = '1.0.0';
 
 		// Register/load some plugin stuff
@@ -1343,7 +1353,7 @@ class UA_myBama_CAS_Auth {
 	private function set_locale() {
 
 		$plugin_i18n = new UA_myBama_CAS_Auth_i18n();
-		$plugin_i18n->set_domain( $this->get_ua_mybama_cas_auth_id() );
+		$plugin_i18n->set_domain( $this->get_plugin_id() );
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -1358,7 +1368,7 @@ class UA_myBama_CAS_Auth {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new UA_myBama_CAS_Auth_Admin( $this->get_ua_mybama_cas_auth_id(), $this->get_version() );
+		$plugin_admin = new UA_myBama_CAS_Auth_Admin( $this->get_plugin_id(), $this->get_plugin_file(), $this->get_version() );
 		
 		// Display admin notices
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'display_admin_notices' );
@@ -1406,7 +1416,7 @@ class UA_myBama_CAS_Auth {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new UA_myBama_CAS_Auth_Public( $this->get_ua_mybama_cas_auth_id(), $this->get_version() );
+		$plugin_public = new UA_myBama_CAS_Auth_Public( $this->get_plugin_id(), $this->get_version() );
 		
 		// Initialize the client first thing - since we have to do so before header output
 		$this->loader->add_action( 'plugins_loaded', $plugin_public, 'initialize_client', 0 );
@@ -1477,7 +1487,7 @@ class UA_myBama_CAS_Auth {
 	 */
 	private function define_shortcodes() {
 
-		$plugin_shortcodes = new UA_myBama_CAS_Auth_Shortcodes( $this->get_ua_mybama_cas_auth_id(), $this->get_version() );
+		$plugin_shortcodes = new UA_myBama_CAS_Auth_Shortcodes( $this->get_plugin_id(), $this->get_version() );
 		
 		// Add [require_mybama_auth] shortcode
 		$this->loader->add_shortcode( 'require_mybama_auth', $plugin_shortcodes, 'require_mybama_auth' );
@@ -1503,8 +1513,18 @@ class UA_myBama_CAS_Auth {
 	 * @since     1.0.0
 	 * @return    string    The ID of the plugin.
 	 */
-	public function get_ua_mybama_cas_auth_id() {
-		return $this->ua_mybama_cas_auth_id;
+	public function get_plugin_id() {
+		return $this->plugin_id;
+	}
+
+	/**
+	 * The path to the plugin's main file.
+	 *
+	 * @since     1.0.0
+	 * @return    string    The path to the plugin's main file.
+	 */
+	public function get_plugin_file() {
+		return $this->plugin_file;
 	}
 
 	/**

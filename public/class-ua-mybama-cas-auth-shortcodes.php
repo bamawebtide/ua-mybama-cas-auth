@@ -24,9 +24,9 @@ class UA_myBama_CAS_Auth_Shortcodes {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $ua_mybama_cas_auth_id    The ID of this plugin.
+	 * @var      string    $plugin_id    The ID of this plugin.
 	 */
-	private $ua_mybama_cas_auth_id;
+	private $plugin_id;
 
 	/**
 	 * The version of this plugin.
@@ -41,12 +41,12 @@ class UA_myBama_CAS_Auth_Shortcodes {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @var      string    $ua_mybama_cas_auth_id	The ID of the plugin.
+	 * @var      string    $plugin_id	The ID of the plugin.
 	 * @var      string    $version    The version of this plugin.
 	 */
-	public function __construct( $ua_mybama_cas_auth_id, $version ) {
+	public function __construct( $plugin_id, $version ) {
 
-		$this->ua_mybama_cas_auth_id = $ua_mybama_cas_auth_id;
+		$this->plugin_id = $plugin_id;
 		$this->version = $version;
 
 	}
@@ -55,8 +55,9 @@ class UA_myBama_CAS_Auth_Shortcodes {
 	 * Shortcode that only shows content if the user is authenticated.
 	 *
 	 * @since    1.0.0
-	 * @var      array    $args					The argument parameters passed to the shortcode
-	 * @var      string   $shortcode_content	Content that was passed within the shortcode declaration.
+	 * @var      array      $args					        The argument parameters passed to the shortcode
+	 * @var      string     $shortcode_content	            Content that was passed within the shortcode declaration.
+	 * @return   string     the built shortcode content
 	 */
 	public function require_mybama_auth( $args, $shortcode_content = NULL ) {
 		global $ua_mybama_cas_auth;

@@ -27,9 +27,18 @@ class UA_myBama_CAS_Auth_Admin {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $ua_mybama_cas_auth_id    The ID of this plugin.
+	 * @var      string    $plugin_id    The ID of this plugin.
 	 */
-	private $ua_mybama_cas_auth_id;
+	private $plugin_id;
+
+	/**
+	 * The path of the plugin's main file.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $plugin_file     The path of the plugin's main file.
+	 */
+	private $plugin_file;
 
 	/**
 	 * The version of this plugin.
@@ -77,13 +86,15 @@ class UA_myBama_CAS_Auth_Admin {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @var      string    $ua_mybama_cas_auth_id		The ID of this plugin.
-	 * @var      string    $version    The version of this plugin.
+	 * @var      string    $plugin_id		The ID of this plugin.
+	 * @var      string    $plugin_file		            The path of the plugin's main file.
+	 * @var      string    $version                     The version of this plugin.
 	 */
-	public function __construct( $ua_mybama_cas_auth_id, $version ) {
+	public function __construct( $plugin_id, $plugin_file, $version ) {
 
 		// Set some data
-		$this->ua_mybama_cas_auth_id = $ua_mybama_cas_auth_id;
+		$this->plugin_id = $plugin_id;
+		$this->plugin_file = $plugin_file;
 		$this->version = $version;
 
 	}
@@ -112,12 +123,12 @@ class UA_myBama_CAS_Auth_Admin {
 			?><div class="error" style="margin: 10px 0;"><p><?php
 				
 				// Display the warning
-				_e( 'The MyBama CAS Authentication plugin cannot work until you provide all CAS host settings.', $this->ua_mybama_cas_auth_id );
+				_e( 'The MyBama CAS Authentication plugin cannot work until you provide all CAS host settings.', $this->plugin_id );
 				
 				// Add link to settings if we're not on settings page
 				if ( ! ( isset( $this->options_page_slug ) && $current_screen->id == "settings_page_{$this->options_page_slug}" ) ) {
 						
-					?> <a href="<?php echo add_query_arg( array( 'page' => $this->options_page_slug ), admin_url( 'options-general.php' ) ); ?>" title="<?php esc_attr_e( 'Manage the MyBama CAS Authentication settings', $this->ua_mybama_cas_auth_id ); ?>"><?php _e( 'Manage settings', $this->ua_mybama_cas_auth_id ); ?></a><?php
+					?> <a href="<?php echo add_query_arg( array( 'page' => $this->options_page_slug ), admin_url( 'options-general.php' ) ); ?>" title="<?php esc_attr_e( 'Manage the MyBama CAS Authentication settings', $this->plugin_id ); ?>"><?php _e( 'Manage settings', $this->plugin_id ); ?></a><?php
 					
 				}
 				
@@ -569,7 +580,7 @@ class UA_myBama_CAS_Auth_Admin {
 	public function add_options_page() {
 		
 		// What is the slug/"pretty" URL ID for our options page?
-		$this->options_page_slug = $this->ua_mybama_cas_auth_id;
+		$this->options_page_slug = $this->plugin_id;
 		
 		// Add the plugin's options page
 		$this->options_page_hook = add_options_page( 'University of Alabama MyBama CAS Authentication', 'MyBama CAS Authentication', 'manage_options', $this->options_page_slug, array( $this, 'print_options_page' ) );
@@ -1211,7 +1222,7 @@ class UA_myBama_CAS_Auth_Admin {
 			case $this->options_page_hook:
 			
 				// Enqueue the styles for our options page
-				wp_enqueue_style( "{$this->ua_mybama_cas_auth_id}-options", plugin_dir_url( __FILE__ ) . 'css/ua-mybama-cas-auth-admin-options.css', array(), $this->version, 'all' );
+				wp_enqueue_style( "{$this->plugin_id}-options", plugin_dir_url( __FILE__ ) . 'css/ua-mybama-cas-auth-admin-options.css', array(), $this->version, 'all' );
 				
 				break;
 			
@@ -1224,10 +1235,10 @@ class UA_myBama_CAS_Auth_Admin {
 					return;
 			
 				// Enqueue our styles for post pages
-				wp_enqueue_style( "{$this->ua_mybama_cas_auth_id}-post", plugin_dir_url( __FILE__ ) . 'css/ua-mybama-cas-auth-admin-post.css', array(), $this->version, 'all' );
+				wp_enqueue_style( "{$this->plugin_id}-post", plugin_dir_url( __FILE__ ) . 'css/ua-mybama-cas-auth-admin-post.css', array(), $this->version, 'all' );
 				
 				// Enqueue our scripts for post pages
-				wp_enqueue_script( "{$this->ua_mybama_cas_auth_id}-post", plugin_dir_url( __FILE__ ) . 'js/ua-mybama-cas-auth-admin-post.js', array( 'jquery' ), $this->version, false );
+				wp_enqueue_script( "{$this->plugin_id}-post", plugin_dir_url( __FILE__ ) . 'js/ua-mybama-cas-auth-admin-post.js', array( 'jquery' ), $this->version, false );
 				
 				break;
 				
@@ -1247,10 +1258,10 @@ class UA_myBama_CAS_Auth_Admin {
 	public function add_plugin_action_links( $actions, $plugin_file, $plugin_data, $context ) {
 		
 		// Add link to our settings page
-		$actions[ 'settings' ] = '<a href="' . add_query_arg( array( 'page' => $this->options_page_slug ), admin_url( 'options-general.php' ) ) . '" title="' . esc_attr__( 'Visit this plugin\'s settings page', $this->ua_mybama_cas_auth_id ) . '">' . __( 'Settings' , $this->ua_mybama_cas_auth_id ) . '</a>';
+		$actions[ 'settings' ] = '<a href="' . add_query_arg( array( 'page' => $this->options_page_slug ), admin_url( 'options-general.php' ) ) . '" title="' . esc_attr__( 'Visit this plugin\'s settings page', $this->plugin_id ) . '">' . __( 'Settings' , $this->plugin_id ) . '</a>';
 		
 		return $actions;
 		
-	}		
+	}
 
 }
