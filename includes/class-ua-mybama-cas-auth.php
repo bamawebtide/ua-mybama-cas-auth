@@ -1406,7 +1406,10 @@ class UA_myBama_CAS_Auth {
 		$this->loader->add_filter( 'plugin_action_links_ua-mybama-cas-auth/ua-mybama-cas-auth.php', $plugin_admin, 'add_plugin_action_links', 10, 4 );
 
 		// Check for the plugin update
-		$this->loader->add_filter( 'site_transient_update_plugins', $plugin_admin, 'check_for_plugin_update', 100 );
+		$this->loader->add_filter( 'site_transient_update_plugins', $plugin_admin, 'check_for_plugin_update', 10 );
+
+		// Display the update changelog
+		$this->loader->add_action( 'install_plugins_pre_plugin-information', $plugin_admin, 'display_changelog', 0 );
 
 	}
 
@@ -1423,12 +1426,6 @@ class UA_myBama_CAS_Auth {
 		
 		// Initialize the client first thing - since we have to do so before header output
 		$this->loader->add_action( 'plugins_loaded', $plugin_public, 'initialize_client', 0 );
-		
-		// Add custom query variables
-		$this->loader->add_action( 'query_vars', $plugin_public, 'add_query_vars' );
-		
-		// Checks media files to restrict access if needed
-		//$this->loader->add_action( 'wp', $plugin_public, 'check_media_files_to_restrict_access', 0 );
 		
 		// Will check for posts that require authentication
 		$this->loader->add_action( 'wp', $plugin_public, 'check_if_post_requires_mybama_authentication_for_page', 0 );
