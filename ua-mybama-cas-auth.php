@@ -8,7 +8,7 @@
  * @wordpress-plugin
  * Plugin Name:       University of Alabama MyBama CAS Authentication
  * Plugin URI:        https://webtide.ua.edu
- * Description:       Contains all the functionality needed to setup myBama authentication (and WordPress Single Sign-on) for your site via a CAS server.
+ * Description:       Contains all the functionality needed to setup myBama authentication (and single sign-on) for your WordPress site via a CAS server.
  * Version:           1.0
  * Author:            Rachel Carden, WebTide
  * Author URI:        https://webtide.ua.edu
