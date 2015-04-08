@@ -1308,34 +1308,30 @@ class UA_myBama_CAS_Auth {
 	 */
 	private function load_dependencies() {
 
-		/**
-		 * The class responsible for orchestrating the actions and filters of the
-		 * core plugin.
-		 */
+		// The class responsible for orchestrating the actions and filters of the core plugin
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ua-mybama-cas-auth-loader.php';
 
-		/**
-		 * The class responsible for defining internationalization functionality
-		 * of the plugin.
-		 */
+		// The class responsible for defining internationalization functionality of the plugin
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ua-mybama-cas-auth-i18n.php';
 
-		/**
-		 * The class responsible for defining all actions that occur in the Dashboard.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ua-mybama-cas-auth-admin.php';
+		// We only need these files in the admin
+		if ( is_admin() ) {
 
-		/**
-		 * The class responsible for defining all actions that occur in the public-facing
-		 * side of the site.
-		 */
+			// The class responsible for defining all actions that occur in the Dashboard
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ua-mybama-cas-auth-admin.php';
+
+			// The class responsible for defining all actions to keep the plugin up-to-date
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ua-mybama-cas-auth-updater.php';
+
+		}
+
+		// The class responsible for defining all actions that occur in the public-facing side of the site
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-ua-mybama-cas-auth-public.php';
 
-		/**
-		 * The class responsible for managing all of the plugin's shortcodes.
-		 */
+		// The class responsible for managing all of the plugin's shortcodes
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-ua-mybama-cas-auth-shortcodes.php';
 
+		// Set the loader
 		$this->loader = new UA_myBama_CAS_Auth_Loader();
 
 	}
@@ -1367,7 +1363,15 @@ class UA_myBama_CAS_Auth {
 	 */
 	private function define_admin_hooks() {
 
+		// We only need these hooks in the admin
+		if ( ! is_admin() )
+			return;
+
+		// Load our admin class
 		$plugin_admin = new UA_myBama_CAS_Auth_Admin( $this->get_plugin_id(), $this->get_plugin_file(), $this->get_version() );
+
+		// Load our updater class
+		$plugin_updater = new UA_myBama_CAS_Auth_Updater( $this->get_plugin_id(), $this->get_plugin_file(), $this->get_version() );
 		
 		// Display admin notices
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'display_admin_notices' );
@@ -1405,10 +1409,10 @@ class UA_myBama_CAS_Auth {
 		$this->loader->add_filter( 'plugin_action_links_ua-mybama-cas-auth/ua-mybama-cas-auth.php', $plugin_admin, 'add_plugin_action_links', 10, 4 );
 
 		// Check for the plugin update
-		$this->loader->add_filter( 'site_transient_update_plugins', $plugin_admin, 'check_for_plugin_update', 10 );
+		$this->loader->add_filter( 'site_transient_update_plugins', $plugin_updater, 'check_for_plugin_update', 10 );
 
 		// Display the update changelog
-		$this->loader->add_action( 'install_plugins_pre_plugin-information', $plugin_admin, 'display_changelog', 0 );
+		$this->loader->add_action( 'install_plugins_pre_plugin-information', $plugin_updater, 'display_changelog', 0 );
 
 	}
 
