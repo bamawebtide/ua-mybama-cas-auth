@@ -1367,11 +1367,11 @@ class UA_myBama_CAS_Auth {
 		if ( ! is_admin() )
 			return;
 
-		// Load our admin class
-		$plugin_admin = new UA_myBama_CAS_Auth_Admin( $this->get_plugin_id(), $this->get_plugin_file(), $this->get_version() );
-
 		// Load our updater class
 		$plugin_updater = new UA_myBama_CAS_Auth_Updater( $this->get_plugin_id(), $this->get_plugin_file(), $this->get_version() );
+
+		// Load our admin class
+		$plugin_admin = new UA_myBama_CAS_Auth_Admin( $this->get_plugin_id(), $this->get_plugin_file(), $this->get_version() );
 		
 		// Display admin notices
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'display_admin_notices' );
@@ -1407,12 +1407,6 @@ class UA_myBama_CAS_Auth {
 		
 		// Add plugin action links
 		$this->loader->add_filter( 'plugin_action_links_ua-mybama-cas-auth/ua-mybama-cas-auth.php', $plugin_admin, 'add_plugin_action_links', 10, 4 );
-
-		// Check for the plugin update
-		$this->loader->add_filter( 'site_transient_update_plugins', $plugin_updater, 'check_for_plugin_update', 10 );
-
-		// Display the update changelog
-		$this->loader->add_action( 'install_plugins_pre_plugin-information', $plugin_updater, 'display_changelog', 0 );
 
 	}
 

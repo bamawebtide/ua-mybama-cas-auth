@@ -71,6 +71,12 @@ class UA_myBama_CAS_Auth_Updater {
 		$this->plugin_file = $plugin_file;
 		$this->version = $version;
 
+		// Check for the plugin update
+		add_filter( 'site_transient_update_plugins', array( $this, 'check_for_plugin_update' ), 10 );
+
+		// Display the update changelog
+		add_action( 'install_plugins_pre_plugin-information', array( $this, 'display_changelog' ), 0 );
+
 	}
 
 	/**
@@ -95,10 +101,6 @@ class UA_myBama_CAS_Auth_Updater {
 			// Get the response body
 			if ( ( $response = wp_remote_get( $remote_url ) ) && ! is_wp_error( $response )
 			     && ( $response_body = json_decode( wp_remote_retrieve_body( $response ) ) ) ) {
-
-				echo "<pre>";
-				print_r( $response_body );
-				echo "</pre>";
 
 				// Store the response
 				$this->update_response = $response_body;
@@ -131,10 +133,6 @@ class UA_myBama_CAS_Auth_Updater {
 		// Get the update response
 		if ( $update_response = $this->get_plugin_update_response() ) {
 
-			echo "<pre>";
-			print_r( $update_response );
-			echo "</pre>";
-
 			// If we have a response, add to the info
 			if ( ( $new_version = isset( $update_response->new_version ) ? $update_response->new_version : false )
 			     && floatval( $new_version ) > floatval( $this->version ) ) {
@@ -164,10 +162,6 @@ class UA_myBama_CAS_Auth_Updater {
 
 		// Get the update response
 		if ( $update_response = $this->get_plugin_update_response() ) {
-
-			echo "<pre>";
-			print_r( $update_response );
-			echo "</pre>";
 
 			// Get new version
 			$new_version = isset( $update_response->new_version ) ? $update_response->new_version : false;
