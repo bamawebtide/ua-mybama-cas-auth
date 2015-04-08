@@ -1374,10 +1374,27 @@ class UA_myBama_CAS_Auth_Admin {
 			?><div style="height:97%;margin:20px;padding:20px;border:1px solid #aaa;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;">
 				<h2>What's New in UA MyBama CAS Authentication<?php echo $new_version ? " v{$new_version}" : NULL; ?></h2><?php
 
-				// Print changelog data
+				// Get changelog data
 				if ( $changelog = isset( $update_response->changelog ) ? $update_response->changelog : false ) {
 
-					echo $changelog;
+					// If hosted on GitHub, we need our markdown parser
+					if ( isset( $update_response->is_hosted_on_github ) && $update_response->is_hosted_on_github ) {
+
+						// Load the ParseDown library
+						require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/ParseDown.php';
+
+						// Setup ParseDown
+						$parsedown = new Parsedown();
+
+						// Print Markdown text from GitHub
+						echo $parsedown->text( $changelog );
+
+					// Otherwise, just print
+					} else {
+
+						echo wpautop( $changelog );
+
+					}
 
 				} else {
 
