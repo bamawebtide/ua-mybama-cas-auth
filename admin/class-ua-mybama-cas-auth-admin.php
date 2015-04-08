@@ -118,8 +118,8 @@ class UA_myBama_CAS_Auth_Admin {
 		
 		// We need to show a warning if they have not entered host settings
 
-		// Only show on certain pages - the dashboard and the settings page
-		if ( ! ( isset( $current_screen ) && isset( $current_screen->id ) && ( $current_screen->id == 'dashboard' || ( isset( $this->options_page_slug ) && $current_screen->id == "settings_page_{$this->options_page_slug}" ) ) ) )
+		// Only show on the settings page
+		if ( ! ( isset( $current_screen ) && isset( $current_screen->id ) && isset( $this->options_page_slug ) && $current_screen->id == "settings_page_{$this->options_page_slug}" ) )
 			return;
 		
 		// What host and context are we using?
@@ -129,17 +129,10 @@ class UA_myBama_CAS_Auth_Admin {
 		// If no host or context, show error message
 		if ( ! $cas_host || ! $cas_context ) {
 		
-			?><div class="error" style="margin: 10px 0;"><p><?php
-				
-				// Display the warning
-				_e( 'The MyBama CAS Authentication plugin cannot work until you provide all CAS host settings.', $this->plugin_id );
-				
-				// Add link to settings if we're not on settings page
-				if ( ! ( isset( $this->options_page_slug ) && $current_screen->id == "settings_page_{$this->options_page_slug}" ) ) {
-						
-					?> <a href="<?php echo add_query_arg( array( 'page' => $this->options_page_slug ), admin_url( 'options-general.php' ) ); ?>" title="<?php esc_attr_e( 'Manage the MyBama CAS Authentication settings', $this->plugin_id ); ?>"><?php _e( 'Manage settings', $this->plugin_id ); ?></a><?php
-					
-				}
+			?><div class="error" style="margin:10px 0;"><p><?php
+
+				// Display the notice
+				_e( 'The MyBama CAS Authentication plugin cannot work until you provide all CAS server settings.', $this->plugin_id );
 				
 			?></p></div><?php
 				
@@ -620,7 +613,10 @@ class UA_myBama_CAS_Auth_Admin {
 		
 		// Save Changes
 		add_meta_box( 'ua-mybama-cas-auth-save-changes', 'Save Changes', array( $this, 'print_options_meta_boxes' ), $this->options_page_hook, 'side', 'core', 'save_changes' );
-		
+
+		// Getting Started
+		add_meta_box( 'ua-mybama-cas-auth-getting-started', 'Getting Started', array( $this, 'print_options_meta_boxes' ), $this->options_page_hook, 'normal', 'core', 'getting_started' );
+
 		// Host Settings
 		add_meta_box( 'ua-mybama-cas-auth-host-settings', 'Host Settings', array( $this, 'print_options_meta_boxes' ), $this->options_page_hook, 'normal', 'core', 'host_settings' );
 		
@@ -656,8 +652,8 @@ class UA_myBama_CAS_Auth_Admin {
 		extract( $ua_mybama_cas_auth->get_settings(), EXTR_OVERWRITE );
 
 		switch( $metabox_id = $metabox[ 'args' ] ) {
-			
-			//! About Meta Box
+
+			//! About
 			case 'about':
 			
 				// Print the plugin name (with link to site)
@@ -665,7 +661,7 @@ class UA_myBama_CAS_Auth_Admin {
 					
 				// Print the plugin version and author (with link to site)
 				?><p><strong>Version:</strong> <?php echo $this->version; ?><br />
-                <strong>Author:</strong> <a href="https://webtide.ua.edu/" target="_blank">Rachel Carden</a></p><?php
+                <strong>Author:</strong> <a href="mailto:rmcarden@ur.ua.edu" target="_blank">Rachel Carden</a></p><?php
                 
 				break;
 				
@@ -675,13 +671,20 @@ class UA_myBama_CAS_Auth_Admin {
 				echo submit_button( 'Save Your Changes', 'primary', 'save_ua_mybama_cas_auth_settings', false, array( 'id' => 'save-ua-mybama-cas-auth-settings-mb' ) );
 				
 				break;
-				
+
+			//! Getting Started
+			case 'getting_started':
+
+				?><p>Before you can use this plugin, you must first request access to the CAS server. In order to request access, submit a ticket to the <a href="http://oit.ua.edu/oit/services/it-service-desk/" target="_blank">OIT service desk</a>. Once you have gained access, you will be given the host address and context information for the production and test CAS servers.</p><?php
+
+				break;
+
 			//! Host Settings
 			case 'host_settings':
-			
+
 				?><fieldset id="enable-test-mode-setting">
 					<legend class="screen-reader-text"><span>Enable test mode</span></legend>
-					<p class="ua-mybama-cas-auth-field"><label><input name="ua_mybama_cas_auth_settings[enable_test_mode]" type="checkbox" value="1"<?php checked( isset( $enable_test_mode ) && $enable_test_mode ); ?> /> Enable test mode</label></p>
+					<p class="ua-mybama-cas-auth-field"><label><input id="ua-mybama-cas-auth-settings-enable-test-mode" name="ua_mybama_cas_auth_settings[enable_test_mode]" type="checkbox" value="1"<?php checked( isset( $enable_test_mode ) && $enable_test_mode ); ?> /> Enable test mode</label></p>
 					<p class="description">If set, and information for your test CAS server is provided, the client will connect to your test CAS server instead of your production CAS server.</p>
 				</fieldset>
 				
@@ -701,7 +704,7 @@ class UA_myBama_CAS_Auth_Admin {
 													<legend class="screen-reader-text">
 														<span>What is the address of your production CAS server?</span>
 													</legend>
-													<input name="ua_mybama_cas_auth_settings[cas_production_host_address]" type="text" id="cas_production_host_address" value="<?php echo isset( $cas_production_host_address ) && ! empty( $cas_production_host_address ) ? $cas_production_host_address : NULL; ?>" class="regular-text" />
+													<input name="ua_mybama_cas_auth_settings[cas_production_host_address]" type="text" id="cas_production_host_address" value="<?php echo isset( $cas_production_host_address ) && ! empty( $cas_production_host_address ) ? $cas_production_host_address : NULL; ?>" class="regular-text ua-mybama-cas-auth-not-required-for-test-mode<?php echo ! $enable_test_mode && ! $cas_production_host_address ? ' error' : NULL; ?>" />
 													<p class="description">In a few words, explain what this site is about.</p>
 												</fieldset>
 											</td>
@@ -715,7 +718,7 @@ class UA_myBama_CAS_Auth_Admin {
 													<legend class="screen-reader-text">
 														<span>What context are you using on your production CAS server?</span>
 													</legend>
-													<input name="ua_mybama_cas_auth_settings[cas_production_context]" type="text" id="cas_production_context" value="<?php echo isset( $cas_production_context ) && ! empty( $cas_production_context ) ? $cas_production_context : NULL; ?>" class="regular-text" />
+													<input name="ua_mybama_cas_auth_settings[cas_production_context]" type="text" id="cas_production_context" value="<?php echo isset( $cas_production_context ) && ! empty( $cas_production_context ) ? $cas_production_context : NULL; ?>" class="regular-text ua-mybama-cas-auth-not-required-for-test-mode<?php echo ! $enable_test_mode && ! $cas_production_context ? ' error' : NULL; ?>" />
 													<p class="description">In a few words, explain what this site is about.</p>
 												</fieldset>
 											</td>
@@ -736,7 +739,7 @@ class UA_myBama_CAS_Auth_Admin {
 													<legend class="screen-reader-text">
 														<span>What is the address of your test CAS server?</span>
 													</legend>
-													<input name="ua_mybama_cas_auth_settings[cas_test_host_address]" type="text" id="cas_test_host_address" value="<?php echo isset( $cas_test_host_address ) && ! empty( $cas_test_host_address ) ? $cas_test_host_address : NULL; ?>" class="regular-text" />
+													<input name="ua_mybama_cas_auth_settings[cas_test_host_address]" type="text" id="cas_test_host_address" value="<?php echo isset( $cas_test_host_address ) && ! empty( $cas_test_host_address ) ? $cas_test_host_address : NULL; ?>" class="regular-text ua-mybama-cas-auth-required-for-test-mode<?php echo $enable_test_mode && ! $cas_test_host_address ? ' error' : NULL; ?>" />
 													<p class="description">In a few words, explain what this site is about.</p>
 												</fieldset>
 											</td>
@@ -750,7 +753,7 @@ class UA_myBama_CAS_Auth_Admin {
 													<legend class="screen-reader-text">
 														<span>What context are you using on your test CAS server?</span>
 													</legend>
-													<input name="ua_mybama_cas_auth_settings[cas_test_context]" type="text" id="cas_test_context" value="<?php echo isset( $cas_test_context ) && ! empty( $cas_test_context ) ? $cas_test_context : NULL; ?>" class="regular-text" />
+													<input name="ua_mybama_cas_auth_settings[cas_test_context]" type="text" id="cas_test_context" value="<?php echo isset( $cas_test_context ) && ! empty( $cas_test_context ) ? $cas_test_context : NULL; ?>" class="regular-text ua-mybama-cas-auth-required-for-test-mode<?php echo $enable_test_mode && ! $cas_test_context ? ' error' : NULL; ?>" />
 													<p class="description">In a few words, explain what this site is about.</p>
 												</fieldset>
 											</td>
@@ -1232,6 +1235,9 @@ class UA_myBama_CAS_Auth_Admin {
 			
 				// Enqueue the styles for our options page
 				wp_enqueue_style( "{$this->plugin_id}-options", plugin_dir_url( __FILE__ ) . 'css/ua-mybama-cas-auth-admin-options.css', array(), $this->version, 'all' );
+
+				// Enqueue the script for our options page
+				wp_enqueue_script( "{$this->plugin_id}-options", plugin_dir_url( __FILE__ ) . 'js/ua-mybama-cas-auth-admin-options.js', array( 'jquery' ), $this->version, false );
 				
 				break;
 			

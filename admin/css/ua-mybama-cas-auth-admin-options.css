@@ -97,6 +97,10 @@ p.ua-mybama-cas-auth-field.indent {
 .ua-mybama-cas-auth-field input[type="text"] {
 	width: 100%;
 	}
+
+.ua-mybama-cas-auth-field input[type="text"].error {
+    border-color: red;
+}
 	
 .ua-mybama-cas-auth-field.checkboxes label {
 	display: inline-block;
