@@ -1214,7 +1214,6 @@ class UA_myBama_CAS_Auth {
 			'enable_test_mode' => false,
 			'enable_post_mybama_authentication_setting' => false,
 			'post_mybama_authentication_setting_post_types' => false,
-			'media_authentication' => false,
 			'mybama_username_whitelist' => false,
 			'mybama_username_blacklist' => false,
 			'enable_single_sign_on' => false,

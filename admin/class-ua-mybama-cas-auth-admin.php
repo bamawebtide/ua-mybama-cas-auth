@@ -623,10 +623,6 @@ class UA_myBama_CAS_Auth_Admin {
 		// Content Settings
 		add_meta_box( 'ua-mybama-cas-auth-content-settings', 'Content Settings', array( $this, 'print_options_meta_boxes' ), $this->options_page_hook, 'normal', 'core', 'content_settings' );
 		
-		// Media Settings
-		// @TODO get this to work with media_authentication setting
-		//add_meta_box( 'ua-mybama-cas-auth-media-settings', 'Media Settings', array( $this, 'print_options_meta_boxes' ), $this->options_page_hook, 'normal', 'core', 'media_settings' );
-		
 		// User Settings
 		add_meta_box( 'ua-mybama-cas-auth-user-settings', 'User Settings', array( $this, 'print_options_meta_boxes' ), $this->options_page_hook, 'normal', 'core', 'user_settings' );
 		
@@ -675,7 +671,7 @@ class UA_myBama_CAS_Auth_Admin {
 			//! Getting Started
 			case 'getting_started':
 
-				?><p>Before you can use this plugin, you must first request access to the CAS server. In order to request access, submit a ticket to the <a href="http://oit.ua.edu/oit/services/it-service-desk/" target="_blank">OIT service desk</a>. Once you have gained access, you will be given the host address and context information for the production and test CAS servers.</p><?php
+				?><p>Before you can use this plugin, you must first request access to the CAS server. In order to request access, submit a ticket to the <a href="http://oit.ua.edu/oit/services/it-service-desk/" target="_blank">OIT service desk</a>. Once you have gained access, you will be given the host address and context information for the production and test CAS servers. If you need assistance, please feel free to email the plugin's author: <a href="mailto:rmcarden@ur.ua.edu">Rachel Carden</a>.</p><?php
 
 				break;
 
@@ -828,37 +824,6 @@ class UA_myBama_CAS_Auth_Admin {
 				</table><?php
 				
 				break;
-				
-			//! Media Settings
-			// @TODO get this to work with media_authentication setting
-			/*case 'media_settings':
-			
-				?><table class="form-table">
-					<tbody>
-						<tr>
-							<th scope="row">Restrict Access to Media</th>
-							<td>
-								
-								<h4 class="ua-mybama-cas-auth-field-label">Do you want to require authentication in order for users to access media files?</h4>
-				
-								<fieldset>
-									<legend class="screen-reader-text">
-										<span>Do you want to require authentication in order for users to access media files?</span>
-									</legend>
-									<p class="description">If enabled...</p>
-									<p class="ua-mybama-cas-auth-field indent">
-										<label><input name="ua_mybama_cas_auth_settings[media_authentication]" type="radio" value="yes_for_all" class="tog"<?php checked( isset( $media_authentication ) && strcasecmp( 'yes_for_all', $media_authentication ) == 0 ); ?> /> Yes, require authentication for all media files</label><br />
-										<label><input name="ua_mybama_cas_auth_settings[media_authentication]" type="radio" value="yes_but_not_all" class="tog"<?php checked( isset( $media_authentication ) && strcasecmp( 'yes_but_not_all', $media_authentication ) == 0 ); ?> /> Yes, but not for all of them. Allow me to define which files require authentication.</label><br />
-										<label><input name="ua_mybama_cas_auth_settings[media_authentication]" type="radio" value="0" class="tog"<?php checked( ! isset( $media_authentication ) || ! $media_authentication ); ?> /> No</label>
-									</p>
-								</fieldset>
-								
-							</td>
-						</tr>
-					</tbody>
-				</table><?php
-			
-				break;*/
 				
 			//! User Settings
 			case 'user_settings':
@@ -1174,7 +1139,7 @@ class UA_myBama_CAS_Auth_Admin {
 									<li><strong>show_logged_in_message:</strong> false</li>
 									<li><strong>need_to_login_message:</strong> 'This content requires you to login through myBama.'
 										<ul>
-											<li><em>You can <a href="http://codex.wordpress.org/Function_Reference/add_filter" target="_blank">filter the message</a> by hooking into the 'ua_mybama_cas_auth_need_to_mybama_login_shortcode_message' filter, which has 3 parameters: $need_to_login_message (the original message), $args (the shortcode arguments), and $login_url (the myBama login url).</em></li>
+											<li><em>You can also <a href="http://codex.wordpress.org/Function_Reference/add_filter" target="_blank">filter the message</a> by hooking into the 'ua_mybama_cas_auth_need_to_mybama_login_shortcode_message' filter, which has 3 parameters: $need_to_login_message (the original message), $args (the shortcode arguments), and $login_url (the myBama login url).</em></li>
 										</ul>
 									</li>
 								</ul>
@@ -1194,7 +1159,7 @@ class UA_myBama_CAS_Auth_Admin {
 									<li><strong>show_need_to_login_message:</strong> true</li>
 									<li><strong>need_to_login_message:</strong> 'This content requires you to login.'
 										<ul>
-											<li><em>You can <a href="http://codex.wordpress.org/Function_Reference/add_filter" target="_blank">filter the message</a> by hooking into the 'ua_mybama_cas_auth_need_to_wordpress_login_shortcode_message' filter, which has 3 parameters: $need_to_login_message (the original message), $args (the shortcode arguments), and $login_url (the WordPress login url).</em></li>
+											<li><em>You can also <a href="http://codex.wordpress.org/Function_Reference/add_filter" target="_blank">filter the message</a> by hooking into the 'ua_mybama_cas_auth_need_to_wordpress_login_shortcode_message' filter, which has 3 parameters: $need_to_login_message (the original message), $args (the shortcode arguments), and $login_url (the WordPress login url).</em></li>
 										</ul>
 									</li>
 									<li><strong>current_user_can:</strong> false
@@ -1205,7 +1170,7 @@ class UA_myBama_CAS_Auth_Admin {
 									<li><strong>show_current_user_cant_message:</strong> true</li>
 									<li><strong>current_user_cant_message:</strong> 'You do not have permission to view this content.'
 										<ul>
-											<li><em>You can <a href="http://codex.wordpress.org/Function_Reference/add_filter" target="_blank">filter the message</a> by hooking into the 'ua_mybama_cas_auth_current_user_cant_shortcode_message' filter, which has 2 parameters: $current_user_cant_message (the original message) and $args (the shortcode arguments).</em></li>
+											<li><em>You can also <a href="http://codex.wordpress.org/Function_Reference/add_filter" target="_blank">filter the message</a> by hooking into the 'ua_mybama_cas_auth_current_user_cant_shortcode_message' filter, which has 2 parameters: $current_user_cant_message (the original message) and $args (the shortcode arguments).</em></li>
 										</ul>
 									</li>
 								</ul>
