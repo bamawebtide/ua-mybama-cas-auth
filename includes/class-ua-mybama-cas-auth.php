@@ -7,7 +7,7 @@
  * public-facing side of the site and the dashboard.
  *
  * @link       https://webtide.ua.edu
- * @since      1.0.0
+ * @since      1.0
  *
  * @package    UA_myBama_CAS_Auth
  * @subpackage UA_myBama_CAS_Auth/includes
@@ -22,7 +22,7 @@
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  *
- * @since      1.0.0
+ * @since      1.0
  * @package    UA_myBama_CAS_Auth
  * @subpackage UA_myBama_CAS_Auth/includes
  * @author     Rachel Carden <rmcarden@ur.ua.edu>
@@ -33,7 +33,7 @@ class UA_myBama_CAS_Auth {
 	 * The loader that's responsible for maintaining
 	 * and registering all hooks that power the plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   protected
 	 * @var      UA_myBama_CAS_Auth_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
@@ -42,7 +42,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * The unique identifier of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   protected
 	 * @var      string    $plugin_id    The string used to uniquely identify this plugin.
 	 */
@@ -51,7 +51,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * The path to the plugin's main file.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   protected
 	 * @var      string    $plugin_file    The path to the plugin's main file.
 	 */
@@ -60,7 +60,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * The current version of the plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   protected
 	 * @var      string    $version    The current version of the plugin.
 	 */
@@ -70,7 +70,7 @@ class UA_myBama_CAS_Auth {
 	 * The plugin's custom user settings
 	 * pulled from the options table.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 * @var      array    $settings    The plugin's custom user settings
 	 */
@@ -80,7 +80,7 @@ class UA_myBama_CAS_Auth {
 	 * Boolean value that is set to true
 	 * if test mode is enabled.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   protected
 	 * @var      boolean    $in_test_mode    Will be true if test mode is enabled
 	 */
@@ -90,7 +90,7 @@ class UA_myBama_CAS_Auth {
 	 * Boolean value that is set to true
 	 * if single sign-on is enabled.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   protected
 	 * @var      boolean    $is_single_sign_on    Will be true if single sign-on is enabled
 	 */
@@ -100,7 +100,7 @@ class UA_myBama_CAS_Auth {
 	 * Boolean value that is set to true if
 	 * the CAS client has been initialized.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   protected
 	 * @var      boolean    $client_is_initialized    Will be true if client has been initialized
 	 */
@@ -110,7 +110,7 @@ class UA_myBama_CAS_Auth {
 	 * Boolean value that is set to true if
 	 * the user failed a new authentication attempt.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   protected
 	 * @var      boolean    $failed_new_authentication    Will be true if user failed new authentication attempt
 	 */
@@ -123,14 +123,14 @@ class UA_myBama_CAS_Auth {
 	 * Load the dependencies, define the locale, and set the hooks for the Dashboard and
 	 * the public-facing side of the site.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function __construct() {
 
 		// Set some plugin information
 		$this->plugin_id = 'ua-mybama-cas-auth';
 		$this->plugin_file = 'ua-mybama-cas-auth/ua-mybama-cas-auth.php';
-		$this->version = '1.0.0';
+		$this->version = '1.0';
 
 		// Register/load some plugin stuff
 		$this->load_dependencies();
@@ -147,7 +147,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * Get the authenticated username.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function get_username() {
 		
@@ -163,7 +163,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * Get a specific user attribute.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function get_user_attribute( $attribute ) {
 		
@@ -179,7 +179,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * Get all of the authenticated user's attributes.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function get_user_attributes() {
 		
@@ -197,7 +197,7 @@ class UA_myBama_CAS_Auth {
 	 * if a user is newly authenticated and, if so,
 	 * logs them into WordPress.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 */
 	public function check_for_new_authentication() {
 		
@@ -347,7 +347,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * Defines the IS_MYBAMA_AUTHENTICATED constant.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 */
 	public function define_is_mybama_authenticated() {
 		
@@ -359,7 +359,7 @@ class UA_myBama_CAS_Auth {
 	 * Attempts to sign the authenticated user
 	 * into WordPress by their myBama user name.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 * @return	boolean - whether the login was successful or not
 	 */
 	public function sign_user_into_wordpress() {
@@ -568,7 +568,7 @@ class UA_myBama_CAS_Auth {
 	 * return true to allow WordPress's authentication
 	 * to pass and let the user login.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 * @param 	WP_User|WP_Error|null	$user     		WP_User or WP_Error object from a previous callback. Default is null.
 	 * @param	string                	$wp_username 	Username for authentication
 	 * @param	string                	$wp_password	Password for authentication
@@ -608,7 +608,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * Returns the login URL.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 */
 	public function get_login_url() {
 		
@@ -658,7 +658,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * Returns the logout URL.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 */
 	public function get_logout_url() {
 		
@@ -675,7 +675,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * Returns the current URL.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 */
 	public function get_current_url() {
 		
@@ -694,7 +694,7 @@ class UA_myBama_CAS_Auth {
 	 * login via the 'ua-mybama-cas-auth-login'
 	 * parameter.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 */
 	public function check_for_user_requested_login() {
 		
@@ -765,7 +765,7 @@ class UA_myBama_CAS_Auth {
 	 * logout via the 'ua-mybama-cas-auth-logout'
 	 * parameter.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 */
 	public function check_for_user_requested_logout() {
 		
@@ -803,7 +803,7 @@ class UA_myBama_CAS_Auth {
 	 * a loop. Running wp_logout() will log the user
 	 * out of WordPress and myBama.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 * @param	$redirect_url - where you want to send
 	 *				the user after they logout. By default
 	 *				it sends them to the current page.
@@ -872,7 +872,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * Lets you know if the user is authenticated.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function is_authenticated() {
 		
@@ -887,7 +887,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * Forces the user to authenticate themselves.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function force_authentication() {
 		
@@ -911,7 +911,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * Initializes the CAS client.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function initialize_client() {
 		
@@ -966,7 +966,7 @@ class UA_myBama_CAS_Auth {
 	 *
 	 * Will return true if single sign-on is enabled.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function is_single_sign_on() {
 		
@@ -989,7 +989,7 @@ class UA_myBama_CAS_Auth {
 	 *
 	 * Will return true if test mode is enabled.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function is_in_test_mode() {
 		
@@ -1013,7 +1013,7 @@ class UA_myBama_CAS_Auth {
 	 * login to WordPress after they have been
 	 * authenticated by myBama.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @return	array|false - the array of whitelist usernames or false if there are none
 	 */
 	public function get_wordpress_login_whitelist() {
@@ -1051,7 +1051,7 @@ class UA_myBama_CAS_Auth {
 	 * login to WordPress after they have been
 	 * authenticated by myBama.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @return	array|false - the array of blacklist usernames or false if there are none
 	 */
 	public function get_wordpress_login_blacklist() {
@@ -1088,7 +1088,7 @@ class UA_myBama_CAS_Auth {
 	 * are on the whitelist and are allowed to
 	 * login via myBama.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @return	array|false - the array of whitelist usernames or false if there are none
 	 */
 	public function get_mybama_username_whitelist() {
@@ -1125,7 +1125,7 @@ class UA_myBama_CAS_Auth {
 	 * are on the blacklist and are NOT allowed to
 	 * login via myBama.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @return	array|false - the array of blacklist usernames or false if there are none
 	 */
 	public function get_mybama_username_blacklist() {
@@ -1160,7 +1160,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * Get a specific plugin setting.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 *
 	 * @param	string	$key - 	the setting key
 	 * @return	string|NULL		the setting value or NULL if doenst exist
@@ -1182,7 +1182,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * Get the plugin's settings.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function get_settings() {
 		
@@ -1206,7 +1206,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * Get the plugin's default settings.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function get_default_settings() {
 		
@@ -1239,7 +1239,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * Will retrieve the correct CAS host from the settings.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function get_cas_host() {
 		
@@ -1266,7 +1266,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * Will retrieve the correct CAS context from the settings.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function get_cas_context() {
 		
@@ -1303,7 +1303,7 @@ class UA_myBama_CAS_Auth {
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 */
 	private function load_dependencies() {
@@ -1317,11 +1317,11 @@ class UA_myBama_CAS_Auth {
 		// We only need these files in the admin
 		if ( is_admin() ) {
 
-			// The class responsible for defining all actions that occur in the Dashboard
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ua-mybama-cas-auth-admin.php';
-
 			// The class responsible for defining all actions to keep the plugin up-to-date
 			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ua-mybama-cas-auth-updater.php';
+
+			// The class responsible for defining all actions that occur in the Dashboard
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ua-mybama-cas-auth-admin.php';
 
 		}
 
@@ -1342,7 +1342,7 @@ class UA_myBama_CAS_Auth {
 	 * Uses the UA_myBama_CAS_Auth_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 */
 	private function set_locale() {
@@ -1358,7 +1358,7 @@ class UA_myBama_CAS_Auth {
 	 * Register all of the hooks related to the dashboard functionality
 	 * of the plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
@@ -1420,7 +1420,7 @@ class UA_myBama_CAS_Auth {
 	 * Register all of the hooks related to the
 	 * public-facing functionality of the plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 */
 	private function define_public_hooks() {
@@ -1461,7 +1461,7 @@ class UA_myBama_CAS_Auth {
 	 * of the site and aren't defined in the
 	 * admin or public class.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 */
 	private function define_common_hooks() {
@@ -1485,7 +1485,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * Register all of the plugin's shortcodes.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 */
 	private function define_shortcodes() {
@@ -1503,7 +1503,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function run() {
 		$this->loader->run();
@@ -1513,7 +1513,7 @@ class UA_myBama_CAS_Auth {
 	 * The ID of the plugin used to uniquely identify it within the context of
 	 * WordPress and to define internationalization functionality.
 	 *
-	 * @since     1.0.0
+	 * @since     1.0
 	 * @return    string    The ID of the plugin.
 	 */
 	public function get_plugin_id() {
@@ -1523,7 +1523,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * The path to the plugin's main file.
 	 *
-	 * @since     1.0.0
+	 * @since     1.0
 	 * @return    string    The path to the plugin's main file.
 	 */
 	public function get_plugin_file() {
@@ -1533,7 +1533,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
-	 * @since     1.0.0
+	 * @since     1.0
 	 * @return    UA_myBama_CAS_Auth_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
@@ -1543,7 +1543,7 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * Retrieve the version number of the plugin.
 	 *
-	 * @since     1.0.0
+	 * @since     1.0
 	 * @return    string    The version number of the plugin.
 	 */
 	public function get_version() {

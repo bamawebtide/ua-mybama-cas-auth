@@ -20,7 +20,7 @@
  * https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate/pull/123#issuecomment-28541913
  *
  * @link       https://webtide.ua.edu
- * @since      1.0.0
+ * @since      1.0
  *
  * @package    UA_myBama_CAS_Auth
  */

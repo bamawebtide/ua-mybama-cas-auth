@@ -4,7 +4,7 @@
  * The dashboard-specific functionality of the plugin.
  *
  * @link       https://webtide.ua.edu
- * @since      1.0.0
+ * @since      1.0
  *
  * @package    UA_myBama_CAS_Auth
  * @subpackage UA_myBama_CAS_Auth/admin
@@ -25,7 +25,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 * @var      string    $plugin_id    The ID of this plugin.
 	 */
@@ -34,7 +34,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * The path of the plugin's main file.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 * @var      string    $plugin_file     The path of the plugin's main file.
 	 */
@@ -43,7 +43,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
@@ -55,7 +55,7 @@ class UA_myBama_CAS_Auth_Admin {
 	 * The hook is the key that WordPress uses for the page while the slug
 	 * is the "pretty" identifer in the URL.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 * @var      string    $options_page_hook    The options page hook.
 	 */
@@ -67,7 +67,7 @@ class UA_myBama_CAS_Auth_Admin {
 	 * The hook is the key that WordPress uses for the page while the slug
 	 * is the "pretty" identifer in the URL.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 * @var      string    $options_page_slug    The options page slug.
 	 */
@@ -76,7 +76,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * Will be true if we added meta boxes to the current admin screen.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 * @var      boolean    $added_meta_boxes    Whether or not we have added meta boxes
 	 */
@@ -85,7 +85,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @var      string    $plugin_id		The ID of this plugin.
 	 * @var      string    $plugin_file		            The path of the plugin's main file.
 	 * @var      string    $version                     The version of this plugin.
@@ -102,7 +102,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * Displays any needed admin notices.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function display_admin_notices() {
 		global $ua_mybama_cas_auth, $current_screen;
@@ -134,7 +134,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * Register the plugin's settings/options.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function register_settings() {
 		
@@ -146,7 +146,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * Sanitizes the 'ua_mybama_cas_auth_settings' option.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 * @param 	array - $settings - the settings that are being sanitized
 	 * @return	array - sanitized $settings
 	 */
@@ -197,7 +197,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * Add custom admin columns.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 * @param	array - the original columns info
 	 * @param	string - the post type that we're viewing
 	 */
@@ -275,7 +275,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * Populate our custom admin columns.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 * @param	string - the name, or index, of the column
 	 * @param	integer - the ID of the post data we need
 	 */
@@ -349,7 +349,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * Add meta boxes to the "Edit Post" screens.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 * @param	string - the post type that's being edited
 	 * @param	object - information about the post that's being edited
 	 */
@@ -393,7 +393,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * "Do"/print our meta boxes after the post title.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 * @param	array - $post - information about the post that's being edited
 	 */
 	public function do_meta_boxes_after_title( $post ) {
@@ -406,7 +406,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * Print the edit post meta boxes.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 * @param	array - $post - information about the post that's being edited
 	 * @param	array - $metabox - information about the metabox
 	 */
@@ -503,7 +503,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * Runs when a post is saved. Will save post meta.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function save_post( $post_id, $post, $update ) {
 		
@@ -568,7 +568,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * Add the plugin's options page.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function add_options_page() {
 		
@@ -583,7 +583,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * Print the plugin's options page.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function print_options_page() {
 		
@@ -595,7 +595,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * Add the plugin options meta boxes.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function add_options_meta_boxes() {
 		
@@ -628,7 +628,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * Print the plugin options meta boxes.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 * @param	array - $post - information about the current post, which is empty because there is no current post on a settings page
 	 * @param	array - $metabox - information about the metabox
 	 */
@@ -1180,7 +1180,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * Register the stylesheets for the Dashboard.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 */
 	public function enqueue_styles( $hook_suffix ) {
 
@@ -1220,7 +1220,7 @@ class UA_myBama_CAS_Auth_Admin {
 	/**
 	 * Adds a settings link to the plugins page.
 	 * 
-	 * @since 	1.0.0
+	 * @since 	1.0
 	 * @param	$actions - an array of plugin action links
 	 * @param 	$plugin_file - path to the plugin file
 	 * @param	$context - The plugin context. Defaults are 'All', 'Active', 'Inactive', 'Recently Activated', 'Upgrade', 'Must-Use', 'Drop-ins', 'Search'

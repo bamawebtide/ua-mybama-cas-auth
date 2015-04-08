@@ -2,14 +2,14 @@
 
 /**
  * @link              https://webtide.ua.edu
- * @since             1.0.0
+ * @since             1.0
  * @package           UA_myBama_CAS_Auth
  *
  * @wordpress-plugin
  * Plugin Name:       University of Alabama MyBama CAS Authentication
  * Plugin URI:        https://webtide.ua.edu
  * Description:       Contains all the functionality needed to setup myBama authentication (and WordPress Single Sign-on) for your site via a CAS server.
- * Version:           1.0.0
+ * Version:           1.0
  * Author:            Rachel Carden, WebTide
  * Author URI:        https://webtide.ua.edu
  * License:           GPL-2.0+
@@ -57,7 +57,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-ua-mybama-cas-auth.php';
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.0.0
+ * @since    1.0
  */
 function run_ua_mybama_cas_auth() {
 	global $ua_mybama_cas_auth;
@@ -72,7 +72,7 @@ run_ua_mybama_cas_auth();
  * Returns boolean on whether the current
  * user is authenticated.
  *
- * @since    1.0.0
+ * @since    1.0
  */
 function is_ua_mybama_cas_authenticated() {
 	global $ua_mybama_cas_auth;

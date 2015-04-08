@@ -4,7 +4,7 @@
  * The public-facing functionality of the plugin.
  *
  * @link       https://webtide.ua.edu
- * @since      1.0.0
+ * @since      1.0
  *
  * @package    UA_myBama_CAS_Auth
  * @subpackage UA_myBama_CAS_Auth/public
@@ -25,7 +25,7 @@ class UA_myBama_CAS_Auth_Public {
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 * @var      string    $plugin_id    The ID of this plugin.
 	 */
@@ -34,7 +34,7 @@ class UA_myBama_CAS_Auth_Public {
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
@@ -43,7 +43,7 @@ class UA_myBama_CAS_Auth_Public {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @var      string    $plugin_id	The ID of the plugin.
 	 * @var      string    $version    The version of this plugin.
 	 */
@@ -63,7 +63,7 @@ class UA_myBama_CAS_Auth_Public {
 	 * errors when trying to check during the 'the_content'
 	 * filter since that's usually run in the middle of the page.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 */
 	public function initialize_client() {
 		global $ua_mybama_cas_auth;
@@ -80,7 +80,7 @@ class UA_myBama_CAS_Auth_Public {
 	/**
 	 * Adds CSS file(s) to the login page.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 */
 	public function add_login_css() {
 		global $ua_mybama_cas_auth;
@@ -122,7 +122,7 @@ class UA_myBama_CAS_Auth_Public {
 	 * (per user settings) and your only option is to
 	 * login through myBama.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 * @param 	string - $lostpassword_url The lost password page URL.
 	 * @param 	string - $redirect         The path to redirect to on login.
 	 */
@@ -152,7 +152,7 @@ class UA_myBama_CAS_Auth_Public {
 	/**
 	 * Adds "Login through myBama" button to login form.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 */
 	public function add_mybama_button_to_login_form() {
 		global $ua_mybama_cas_auth;
@@ -185,7 +185,7 @@ class UA_myBama_CAS_Auth_Public {
 	 * Checks to see if the current post requires myBama authentication
 	 * in order to view the page.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 * @param	WP object - the WordPress environment setup
 	 */
 	public function check_if_post_requires_mybama_authentication_for_page( $wp ) {
@@ -216,7 +216,7 @@ class UA_myBama_CAS_Auth_Public {
 	 * Checks to see if the current post requires WordPress authentication
 	 * in order to view the page.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 * @param	WP object - the WordPress environment setup
 	 */
 	public function check_if_post_requires_wordpress_authentication_for_page( $wp ) {
@@ -248,7 +248,7 @@ class UA_myBama_CAS_Auth_Public {
 	 * Checks to see if the current post requires myBama authentication
 	 * in order to view the content.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 * @param	string - the content we're filtering and possibly hiding
 	 */
 	public function check_if_post_requires_mybama_authentication_for_content( $content ) {
@@ -283,7 +283,7 @@ class UA_myBama_CAS_Auth_Public {
 	 * Checks to see if the current post requires WordPress authentication
 	 * in order to view the content.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 * @param	string - the content we're filtering and possibly hiding
 	 */
 	public function check_if_post_requires_wordpress_authentication_for_content( $content ) {
@@ -317,7 +317,7 @@ class UA_myBama_CAS_Auth_Public {
 	/**
 	 * Allows us to filter excerpts.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 * @param 	string - $excerpt - The excerpt we're filtering
 	 */
 	public function filter_the_excerpt( $excerpt ) {
@@ -331,7 +331,7 @@ class UA_myBama_CAS_Auth_Public {
 	/**
 	 * Allows us to filter any queries.
 	 *
-	 * @since   1.0.0
+	 * @since   1.0
 	 * @param 	array - $clauses The list of clauses for the query
 	 * @param	WP_Query - $query - The WP_Query instance (passed by reference)
 	 */

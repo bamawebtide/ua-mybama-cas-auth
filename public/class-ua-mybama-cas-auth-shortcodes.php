@@ -4,7 +4,7 @@
  * Contains all of the plugin's shortcodes.
  *
  * @link       https://webtide.ua.edu
- * @since      1.0.0
+ * @since      1.0
  *
  * @package    UA_myBama_CAS_Auth
  * @subpackage UA_myBama_CAS_Auth/public
@@ -22,7 +22,7 @@ class UA_myBama_CAS_Auth_Shortcodes {
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 * @var      string    $plugin_id    The ID of this plugin.
 	 */
@@ -31,7 +31,7 @@ class UA_myBama_CAS_Auth_Shortcodes {
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
@@ -40,7 +40,7 @@ class UA_myBama_CAS_Auth_Shortcodes {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @var      string    $plugin_id	The ID of the plugin.
 	 * @var      string    $version    The version of this plugin.
 	 */
@@ -54,7 +54,7 @@ class UA_myBama_CAS_Auth_Shortcodes {
 	/**
 	 * Shortcode that only shows content if the user is authenticated.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @var      array      $args					        The argument parameters passed to the shortcode
 	 * @var      string     $shortcode_content	            Content that was passed within the shortcode declaration.
 	 * @return   string     the built shortcode content
@@ -136,7 +136,7 @@ class UA_myBama_CAS_Auth_Shortcodes {
 	/**
 	 * Shortcode that only shows content if the user is logged into WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @var      array    $args					The argument parameters passed to the shortcode
 	 * @var      string   $shortcode_content	Content that was passed within the shortcode declaration.
 	 */

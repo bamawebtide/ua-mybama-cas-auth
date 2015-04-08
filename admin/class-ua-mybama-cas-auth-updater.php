@@ -4,7 +4,7 @@
  * This class defines all code necessary to update the plugin from outside the WordPress.org repo.
  *
  * @link       https://webtide.ua.edu
- * @since      1.0.0
+ * @since      1.0
  *
  * @package    UA_myBama_CAS_Auth
  * @subpackage UA_myBama_CAS_Auth/includes
@@ -13,7 +13,7 @@
 /**
  * This class defines all code necessary to update the plugin from outside the WordPress.org repo.
  *
- * @since      1.0.0
+ * @since      1.0
  * @package    UA_myBama_CAS_Auth
  * @subpackage UA_myBama_CAS_Auth/includes
  * @author     Rachel Carden <rmcarden@ur.ua.edu>
@@ -23,7 +23,7 @@ class UA_myBama_CAS_Auth_Updater {
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 * @var      string    $plugin_id    The ID of this plugin.
 	 */
@@ -32,7 +32,7 @@ class UA_myBama_CAS_Auth_Updater {
 	/**
 	 * The path of the plugin's main file.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 * @var      string    $plugin_file     The path of the plugin's main file.
 	 */
@@ -41,7 +41,7 @@ class UA_myBama_CAS_Auth_Updater {
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
@@ -50,7 +50,7 @@ class UA_myBama_CAS_Auth_Updater {
 	/**
 	 * Will hold the update response so we don't have to request it multiple times.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @access   private
 	 * @var      object    $update_response    Holds the update response
 	 */
@@ -59,7 +59,7 @@ class UA_myBama_CAS_Auth_Updater {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
+	 * @since    1.0
 	 * @var      string    $plugin_id		The ID of this plugin.
 	 * @var      string    $plugin_file		The path of the plugin's main file.
 	 * @var      string    $version         The version of this plugin.
@@ -77,7 +77,7 @@ class UA_myBama_CAS_Auth_Updater {
 	 * Retrieves the update response information
 	 * from the WebTide website.
 	 *
-	 * @since 	1.0.0
+	 * @since 	1.0
 	 */
 	private function get_plugin_update_response() {
 
@@ -95,6 +95,10 @@ class UA_myBama_CAS_Auth_Updater {
 			// Get the response body
 			if ( ( $response = wp_remote_get( $remote_url ) ) && ! is_wp_error( $response )
 			     && ( $response_body = json_decode( wp_remote_retrieve_body( $response ) ) ) ) {
+
+				echo "<pre>";
+				print_r( $response_body );
+				echo "</pre>";
 
 				// Store the response
 				$this->update_response = $response_body;
@@ -114,7 +118,7 @@ class UA_myBama_CAS_Auth_Updater {
 	 * from the WebTide website. The plugin is currently hosted
 	 * on GitHub.
 	 *
-	 * @since 	1.0.0
+	 * @since 	1.0
 	 * @param	$plugins_info - an array of plugin info
 	 * @return 	array - the plugin info info after it has been filtered
 	 */
@@ -126,6 +130,10 @@ class UA_myBama_CAS_Auth_Updater {
 
 		// Get the update response
 		if ( $update_response = $this->get_plugin_update_response() ) {
+
+			echo "<pre>";
+			print_r( $update_response );
+			echo "</pre>";
 
 			// If we have a response, add to the info
 			if ( ( $new_version = isset( $update_response->new_version ) ? $update_response->new_version : false )
@@ -146,7 +154,7 @@ class UA_myBama_CAS_Auth_Updater {
 	 * If the plugin has an update, this displays the changelog
 	 * when the user is wanting to view the update details.
 	 *
-	 * @since 	1.0.0
+	 * @since 	1.0
 	 */
 	public function display_changelog() {
 
@@ -156,6 +164,10 @@ class UA_myBama_CAS_Auth_Updater {
 
 		// Get the update response
 		if ( $update_response = $this->get_plugin_update_response() ) {
+
+			echo "<pre>";
+			print_r( $update_response );
+			echo "</pre>";
 
 			// Get new version
 			$new_version = isset( $update_response->new_version ) ? $update_response->new_version : false;
@@ -177,8 +189,8 @@ class UA_myBama_CAS_Auth_Updater {
 			// Get changelog data
 			if ( $changelog = isset( $update_response->changelog ) ? $update_response->changelog : false ) {
 
-				// If hosted on GitHub, we need our markdown parser
-				if ( isset( $update_response->is_hosted_on_github ) && $update_response->is_hosted_on_github ) {
+				// If the changelog is markdown, we need the parser
+				if ( isset( $update_response->changelog_is_markdown ) && $update_response->changelog_is_markdown ) {
 
 					// Load the ParseDown library
 					require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/ParseDown.php';
@@ -189,7 +201,7 @@ class UA_myBama_CAS_Auth_Updater {
 					// Print Markdown text from GitHub
 					echo $parsedown->text( $changelog );
 
-					// Otherwise, just print
+				// Otherwise, just print
 				} else {
 
 					echo wpautop( $changelog );
