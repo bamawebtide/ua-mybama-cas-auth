@@ -10,7 +10,7 @@
  * Plugin URI:        https://webtide.ua.edu
  * Description:       Contains all the functionality needed to setup myBama authentication (and WordPress Single Sign-on) for your site via a CAS server.
  * Version:           1.0.0
- * Author:            Rachel Carden
+ * Author:            Rachel Carden, WebTide
  * Author URI:        https://webtide.ua.edu
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt

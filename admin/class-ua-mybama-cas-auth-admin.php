@@ -648,7 +648,7 @@ class UA_myBama_CAS_Auth_Admin {
 					
 				// Print the plugin version and author (with link to site)
 				?><p><strong>Version:</strong> <?php echo $this->version; ?><br />
-                <strong>Author:</strong> <a href="mailto:rmcarden@ur.ua.edu" target="_blank">Rachel Carden</a></p><?php
+                <strong>Author:</strong> <a href="mailto:rmcarden@ur.ua.edu" target="_blank">Rachel Carden</a>, <a href="https://webtide.ua.edu/" target="_blank">WebTide</a></p><?php
                 
 				break;
 				
