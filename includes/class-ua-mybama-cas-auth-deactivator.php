@@ -18,7 +18,7 @@
  * @since      1.0
  * @package    UA_myBama_CAS_Auth
  * @subpackage UA_myBama_CAS_Auth/includes
- * @author     Rachel Carden <rmcarden@ur.ua.edu>
+ * @author     Rachel Carden <rmcarden@ua.edu>
  */
 class UA_myBama_CAS_Auth_Deactivator {
 

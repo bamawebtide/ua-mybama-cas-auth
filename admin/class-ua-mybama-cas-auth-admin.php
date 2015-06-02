@@ -18,7 +18,7 @@
  *
  * @package    UA_myBama_CAS_Auth
  * @subpackage UA_myBama_CAS_Auth/admin
- * @author     Rachel Carden <rmcarden@ur.ua.edu>
+ * @author     Rachel Carden <rmcarden@ua.edu>
  */
 class UA_myBama_CAS_Auth_Admin {
 
@@ -648,7 +648,7 @@ class UA_myBama_CAS_Auth_Admin {
 					
 				// Print the plugin version and author (with link to site)
 				?><p><strong>Version:</strong> <?php echo $this->version; ?><br />
-                <strong>Author:</strong> <a href="mailto:rmcarden@ur.ua.edu" target="_blank">Rachel Carden</a>, <a href="https://webtide.ua.edu/" target="_blank">WebTide</a></p><?php
+                <strong>Author:</strong> <a href="mailto:rmcarden@ua.edu" target="_blank">Rachel Carden</a>, <a href="https://webtide.ua.edu/" target="_blank">WebTide</a></p><?php
                 
 				break;
 				
@@ -662,19 +662,21 @@ class UA_myBama_CAS_Auth_Admin {
 			//! Getting Started
 			case 'getting_started':
 
-				?><p>Before you can use this plugin, you must first request access to the CAS server. In order to request access, submit a ticket to the <a href="http://oit.ua.edu/oit/services/it-service-desk/" target="_blank">OIT service desk</a>. Once you have gained access, you will be given the host address and context information for the production and test CAS servers. If you need assistance, please feel free to email the plugin's author: <a href="mailto:rmcarden@ur.ua.edu">Rachel Carden</a>.</p><?php
+				?><p>Before you can use this plugin, you must first request access to the CAS server. In order to request access, submit a ticket to the <a href="http://oit.ua.edu/oit/services/it-service-desk/" target="_blank">OIT service desk</a>. Once you have gained access, you will be given the host address and context information for the production and test CAS servers. If you need assistance, please feel free to email the plugin's author: <a href="mailto:rmcarden@ua.edu">Rachel Carden</a>.</p><?php
 
 				break;
 
 			//! Host Settings
 			case 'host_settings':
 
-				?><fieldset id="enable-test-mode-setting">
+				?><p>You will receive your server information once you have requested, and gained, access to the CAS server. You will not be able to use any of this plugin's functionality until you have gained access to either the production or test CAS server. In order to request access, submit a ticket to the <a href="http://oit.ua.edu/oit/services/it-service-desk/" target="_blank">OIT service desk</a>.</p>
+
+				<fieldset id="enable-test-mode-setting">
 					<legend class="screen-reader-text"><span>Enable test mode</span></legend>
 					<p class="ua-mybama-cas-auth-field"><label><input id="ua-mybama-cas-auth-settings-enable-test-mode" name="ua_mybama_cas_auth_settings[enable_test_mode]" type="checkbox" value="1"<?php checked( isset( $enable_test_mode ) && $enable_test_mode ); ?> /> Enable test mode</label></p>
 					<p class="description">If set, and information for your test CAS server is provided, the client will connect to your test CAS server instead of your production CAS server.</p>
 				</fieldset>
-				
+
 				<table class="form-table">
 					<tbody>
 						<tr>
@@ -689,10 +691,10 @@ class UA_myBama_CAS_Auth_Admin {
 											<td class="ua-mybama-cas-auth-field">
 												<fieldset>
 													<legend class="screen-reader-text">
-														<span>What is the address of your production CAS server?</span>
+														<span>What is the address of your production CAS server? e.g. {something}.ua.edu</span>
 													</legend>
 													<input name="ua_mybama_cas_auth_settings[cas_production_host_address]" type="text" id="cas_production_host_address" value="<?php echo isset( $cas_production_host_address ) && ! empty( $cas_production_host_address ) ? $cas_production_host_address : NULL; ?>" class="regular-text ua-mybama-cas-auth-not-required-for-test-mode<?php echo ! $enable_test_mode && ! $cas_production_host_address ? ' error' : NULL; ?>" />
-													<p class="description">In a few words, explain what this site is about.</p>
+													<p class="description">What is the address of your production CAS server? e.g. {something}.ua.edu</p>
 												</fieldset>
 											</td>
 										</tr>
@@ -703,10 +705,10 @@ class UA_myBama_CAS_Auth_Admin {
 											<td class="ua-mybama-cas-auth-field">
 												<fieldset>
 													<legend class="screen-reader-text">
-														<span>What context are you using on your production CAS server?</span>
+														<span>What context are you using on your production CAS server? This will probably be a file path.</span>
 													</legend>
 													<input name="ua_mybama_cas_auth_settings[cas_production_context]" type="text" id="cas_production_context" value="<?php echo isset( $cas_production_context ) && ! empty( $cas_production_context ) ? $cas_production_context : NULL; ?>" class="regular-text ua-mybama-cas-auth-not-required-for-test-mode<?php echo ! $enable_test_mode && ! $cas_production_context ? ' error' : NULL; ?>" />
-													<p class="description">In a few words, explain what this site is about.</p>
+													<p class="description">What context are you using on your production CAS server? This will probably be a file path.</p>
 												</fieldset>
 											</td>
 										</tr>
@@ -724,10 +726,10 @@ class UA_myBama_CAS_Auth_Admin {
 											<td class="ua-mybama-cas-auth-field">
 												<fieldset>
 													<legend class="screen-reader-text">
-														<span>What is the address of your test CAS server?</span>
+														<span>What is the address of your test CAS server? e.g. {something}.ua.edu</span>
 													</legend>
 													<input name="ua_mybama_cas_auth_settings[cas_test_host_address]" type="text" id="cas_test_host_address" value="<?php echo isset( $cas_test_host_address ) && ! empty( $cas_test_host_address ) ? $cas_test_host_address : NULL; ?>" class="regular-text ua-mybama-cas-auth-required-for-test-mode<?php echo $enable_test_mode && ! $cas_test_host_address ? ' error' : NULL; ?>" />
-													<p class="description">In a few words, explain what this site is about.</p>
+													<p class="description">What is the address of your test CAS server? e.g. {something}.ua.edu</p>
 												</fieldset>
 											</td>
 										</tr>
@@ -738,10 +740,10 @@ class UA_myBama_CAS_Auth_Admin {
 											<td class="ua-mybama-cas-auth-field">
 												<fieldset>
 													<legend class="screen-reader-text">
-														<span>What context are you using on your test CAS server?</span>
+														<span>What context are you using on your test CAS server? This will probably be a file path.</span>
 													</legend>
 													<input name="ua_mybama_cas_auth_settings[cas_test_context]" type="text" id="cas_test_context" value="<?php echo isset( $cas_test_context ) && ! empty( $cas_test_context ) ? $cas_test_context : NULL; ?>" class="regular-text ua-mybama-cas-auth-required-for-test-mode<?php echo $enable_test_mode && ! $cas_test_context ? ' error' : NULL; ?>" />
-													<p class="description">In a few words, explain what this site is about.</p>
+													<p class="description">What context are you using on your test CAS server? This will probably be a file path.</p>
 												</fieldset>
 											</td>
 										</tr>

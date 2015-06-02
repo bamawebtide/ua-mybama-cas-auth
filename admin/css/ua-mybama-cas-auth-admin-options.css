@@ -138,10 +138,6 @@ fieldset#enable-test-mode-setting p.ua-mybama-cas-auth-field {
 	vertical-align: top;
 	}
 	
-#ua-mybama-cas-auth-host-settings .inside {
-	padding-top: 6px;
-	}
-	
 /* Scoot the headers over to the left and decrease vertical space */
 #ua-mybama-cas-auth-host-settings .inside h3 {
 	padding-left: 0;
