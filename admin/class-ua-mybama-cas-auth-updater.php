@@ -127,8 +127,9 @@ class UA_myBama_CAS_Auth_Updater {
 	public function check_for_plugin_update( $plugins_info ) {
 
 		// Make sure we have checked info which contains the current version
-		if ( ! ( $current_version = isset( $plugins_info->checked ) && isset( $plugins_info->checked ) && isset( $plugins_info->checked[ $this->plugin_file ] ) ? $plugins_info->checked[ $this->plugin_file ] : false ) )
+		if ( ! ( $current_version = isset( $plugins_info->checked ) && isset( $plugins_info->checked ) && isset( $plugins_info->checked[ $this->plugin_file ] ) ? $plugins_info->checked[ $this->plugin_file ] : false ) ) {
 			return $plugins_info;
+		}
 
 		// Get the update response
 		if ( $update_response = $this->get_plugin_update_response() ) {
@@ -157,8 +158,9 @@ class UA_myBama_CAS_Auth_Updater {
 	public function display_changelog() {
 
 		// Confirm we're viewing our plugin
-		if ( ! ( $this->plugin_id == $_REQUEST[ 'plugin' ] && 'plugin-information' == $_REQUEST[ 'tab' ] && 'changelog' == $_REQUEST[ 'section' ] ) )
+		if ( ! ( $this->plugin_id == $_REQUEST[ 'plugin' ] && 'plugin-information' == $_REQUEST[ 'tab' ] && 'changelog' == $_REQUEST[ 'section' ] ) ) {
 			return;
+		}
 
 		// Get the update response
 		if ( $update_response = $this->get_plugin_update_response() ) {

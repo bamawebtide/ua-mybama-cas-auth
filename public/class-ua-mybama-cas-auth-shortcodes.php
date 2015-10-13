@@ -217,8 +217,9 @@ class UA_myBama_CAS_Auth_Shortcodes {
 							$current_user_cant_message = apply_filters( 'ua_mybama_cas_auth_current_user_cant_shortcode_message', '<p>' . $current_user_cant_message . '</p>', $args );
 				
 							// Add the message
-							if ( ! empty( $current_user_cant_message ) )
+							if ( ! empty( $current_user_cant_message ) ) {
 								$content .= '<div class="ua-mybama-cas-auth-current-user-cant-message">' . $current_user_cant_message . '</div>';
+							}
 							
 						}
 						

@@ -110,8 +110,9 @@ class UA_myBama_CAS_Auth_Admin {
 		// We need to show a warning if they have not entered host settings
 
 		// Only show on the settings page
-		if ( ! ( isset( $current_screen ) && isset( $current_screen->id ) && isset( $this->options_page_slug ) && $current_screen->id == "settings_page_{$this->options_page_slug}" ) )
+		if ( ! ( isset( $current_screen ) && isset( $current_screen->id ) && isset( $this->options_page_slug ) && $current_screen->id == "settings_page_{$this->options_page_slug}" ) ) {
 			return;
+		}
 		
 		// What host and context are we using?
 		$cas_host = $ua_mybama_cas_auth->get_cas_host();
@@ -182,8 +183,9 @@ class UA_myBama_CAS_Auth_Admin {
 				}
 				
 				// If empty, set to NULL
-				if ( empty( $settings[ $settings_key ] ) )
-					$settings[ $settings_key ] = NULL;
+				if ( empty( $settings[ $settings_key ] ) ) {
+					$settings[ $settings_key ] = null;
+				}
 				
 			}
 			
@@ -198,8 +200,9 @@ class UA_myBama_CAS_Auth_Admin {
 	 * Add custom admin columns.
 	 *
 	 * @since   1.0
-	 * @param	array - the original columns info
-	 * @param	string - the post type that we're viewing
+	 * @param	array - $posts_columns - the original columns info
+	 * @param	string - $post_type - the post type that we're viewing
+	 * @return  array - $posts_columns - the filtered posts columns
 	 */
 	public function add_admin_columns( $posts_columns, $post_type = 'page' ) {
 		global $ua_mybama_cas_auth;
@@ -364,7 +367,7 @@ class UA_myBama_CAS_Auth_Admin {
 			
 			// Then we only need to add this meta box if the post type is designated
 			if ( isset( $post_mybama_authentication_setting_post_types ) && is_array( $post_mybama_authentication_setting_post_types ) && in_array( $post_type, $post_mybama_authentication_setting_post_types ) ) {
-				
+
 				// Add the meta box!
 				add_meta_box( 'ua-mybama-cas-auth-mybama-cas-authentication', 'MyBama CAS Authentication', array( $this, 'print_meta_boxes' ), $post_type, 'ua-mybama-cas-auth-after-title', 'high', 'mybama-cas-authentication' );
 				
@@ -377,10 +380,10 @@ class UA_myBama_CAS_Auth_Admin {
 			
 			// Then we only need to add this meta box if the post type is designated
 			if ( isset( $sso_post_wordpress_authentication_setting_post_types ) && is_array( $sso_post_wordpress_authentication_setting_post_types ) && in_array( $post_type, $sso_post_wordpress_authentication_setting_post_types ) ) {
-				
+
 				// Add the meta box!
 				add_meta_box( 'ua-mybama-cas-auth-wordpress-authentication', 'WordPress Authentication', array( $this, 'print_meta_boxes' ), $post_type, 'ua-mybama-cas-auth-after-title', 'high', 'wordpress-authentication' );
-				
+
 			}
 			
 		}
@@ -508,16 +511,19 @@ class UA_myBama_CAS_Auth_Admin {
 	public function save_post( $post_id, $post, $update ) {
 		
 		// Pointless if $_POST is empty (this happens on bulk edit)
-		if ( empty( $_POST ) )
+		if ( empty( $_POST ) ) {
 			return $post_id;
+		}
 			
-		// Check autosave
-		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+		// Check auto save
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
 			return $post_id;
+		}
 			
 		// Don't save for revisions
-		if ( isset( $post->post_type ) && $post->post_type == 'revision' )
+		if ( isset( $post->post_type ) && $post->post_type == 'revision' ) {
 			return $post_id;
+		}
 			
 		// Verify our myBama authentication nonce
 		if ( isset( $_POST[ 'setting_requires_mybama_authentication_nonce' ] )
@@ -1204,8 +1210,9 @@ class UA_myBama_CAS_Auth_Admin {
 			case 'post-new.php':
 			
 				// Only add the styles if we added meta boxes
-				if ( ! $this->added_meta_boxes )
+				if ( ! $this->added_meta_boxes ) {
 					return;
+				}
 			
 				// Enqueue our styles for post pages
 				wp_enqueue_style( "{$this->plugin_id}-post", plugin_dir_url( __FILE__ ) . 'css/ua-mybama-cas-auth-admin-post.css', array(), $this->version, 'all' );
