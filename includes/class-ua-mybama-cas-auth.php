@@ -152,8 +152,9 @@ class UA_myBama_CAS_Auth {
 	public function get_username() {
 		
 		// Make sure they're authenticated
-		if ( ! $this->is_authenticated() )
+		if ( ! $this->is_authenticated() ) {
 			return false;
+		}
 		
 		// If no user, return false
 		return ( $user = phpCAS::getUser() ) ? $user : false;
@@ -163,13 +164,16 @@ class UA_myBama_CAS_Auth {
 	/**
 	 * Get a specific user attribute.
 	 *
-	 * @since    1.0
+	 * @since   1.0
+	 * @param   string - $attribute - the specific user attribute
+	 * @return  string - the value of the specific user attribute
 	 */
 	public function get_user_attribute( $attribute ) {
 		
 		// First we need the attributes
-		if ( ! ( $user_attributes = $this->get_user_attributes() ) )
+		if ( ! ( $user_attributes = $this->get_user_attributes() ) ) {
 			return false;
+		}
 		
 		// If set, return the attribute
 		return isset( $user_attributes[ $attribute ] ) ? $user_attributes[ $attribute ] : false;
@@ -180,12 +184,14 @@ class UA_myBama_CAS_Auth {
 	 * Get all of the authenticated user's attributes.
 	 *
 	 * @since    1.0
+	 * @return  array|false - the user attributes or false if they do not exist
 	 */
 	public function get_user_attributes() {
 		
 		// Make sure they're authenticated
-		if ( ! $this->is_authenticated() )
+		if ( ! $this->is_authenticated() ) {
 			return false;
+		}
 			
 		// If no user attributes, return false
 		return ( $user_attributes = phpCAS::getAttributes() ) ? $user_attributes : false;
@@ -202,8 +208,9 @@ class UA_myBama_CAS_Auth {
 	public function check_for_new_authentication() {
 		
 		// Only do for front end
-		if ( is_admin() )
+		if ( is_admin() ) {
 			return;
+		}
 			
 		// Get our "attempt to authenticate" timestamp value
 		// Only need to run this check if we have a cookie value
@@ -231,10 +238,11 @@ class UA_myBama_CAS_Auth {
 					if ( $this->failed_new_authentication ) {
 						
 						// Log them out
-						if ( $this->is_single_sign_on() )
+						if ( $this->is_single_sign_on() ) {
 							wp_logout();
-						else
+						} else {
 							$this->logout();
+						}
 							
 					}
 					
@@ -251,10 +259,11 @@ class UA_myBama_CAS_Auth {
 						// @TODO we need an error system
 						
 						// Log them out
-						if ( $this->is_single_sign_on() )
+						if ( $this->is_single_sign_on() ) {
 							wp_logout();
-						else
+						} else {
 							$this->logout();
+						}
 						
 					// If there is a whitelist, and they're NOT on it...
 					} else if ( isset( $mybama_username_whitelist )
@@ -265,10 +274,11 @@ class UA_myBama_CAS_Auth {
 						// @TODO we need an error system
 						
 						// Log them out
-						if ( $this->is_single_sign_on() )
+						if ( $this->is_single_sign_on() ) {
 							wp_logout();
-						else
+						} else {
 							$this->logout();
+						}
 				
 					// They're good...
 					} else {
@@ -333,10 +343,11 @@ class UA_myBama_CAS_Auth {
 				// @TODO add a message telling the user whats going on
 				
 				// Log them out
-				if ( $this->is_single_sign_on() )
+				if ( $this->is_single_sign_on() ) {
 					wp_logout();
-				else
+				} else {
 					$this->logout();
+				}
 				
 			}
 			
@@ -350,9 +361,7 @@ class UA_myBama_CAS_Auth {
 	 * @since   1.0
 	 */
 	public function define_is_mybama_authenticated() {
-		
 		define( 'IS_MYBAMA_AUTHENTICATED', $this->is_authenticated() );
-	
 	}
 	
 	/**
@@ -365,16 +374,19 @@ class UA_myBama_CAS_Auth {
 	public function sign_user_into_wordpress() {
 		
 		// Make sure single sign-on is enabled
-		if ( ! $this->is_single_sign_on() )
+		if ( ! $this->is_single_sign_on() ) {
 			return false;
+		}
 		
 		// Make sure they are authenticated
-		if ( ! $this->is_authenticated() )
+		if ( ! $this->is_authenticated() ) {
 			return false;
+		}
 			
 		// Make sure we have a user
-		if ( ! ( $username = $this->get_username() ) )
+		if ( ! ( $username = $this->get_username() ) ) {
 			return false;
+		}
 			
 		// Check to see if we have whitelist and/or blacklist settings
 		$wp_login_whitelist = $this->get_wordpress_login_whitelist();
@@ -389,8 +401,10 @@ class UA_myBama_CAS_Auth {
 			// Do not log them in to WordPress!
 			return false;
 			
+		}
+
 		// If there is a whitelist, and they're NOT on it...
-		} else if ( isset( $wp_login_whitelist )
+		else if ( isset( $wp_login_whitelist )
 			&& is_array( $wp_login_whitelist )
 			&& ! empty( $wp_login_whitelist )
 			&& ! in_array( $username, $wp_login_whitelist ) ) {
@@ -414,8 +428,9 @@ class UA_myBama_CAS_Auth {
 				$user_data = array();
 				
 				// If we have an email, add it
-				if ( $user_email = $this->get_user_attribute( 'email' ) )
+				if ( $user_email = $this->get_user_attribute( 'email' ) ) {
 					$user_data[ 'user_email' ] = $user_email;
+				}
 					
 				// If we have a first name, add it - set as nickname too
 				if ( $user_first_name = $this->get_user_attribute( 'firstname' ) ) {
@@ -438,8 +453,9 @@ class UA_myBama_CAS_Auth {
 				$user_display_name = isset( $user_first_name ) && ! empty( $user_first_name ) ? $user_first_name : NULL;
 				
 				// If we have a last name, add it
-				if ( isset( $user_last_name ) && ! empty( $user_last_name ) )
+				if ( isset( $user_last_name ) && ! empty( $user_last_name ) ) {
 					$user_display_name .= " {$user_last_name}";
+				}
 					
 				// If we have a display name, add it
 				if ( isset( $user_display_name ) && ! empty( $user_display_name ) ) {
@@ -484,8 +500,9 @@ class UA_myBama_CAS_Auth {
 			$create_matching_profile = $this->get_setting( 'sso_create_matching_profile' );
 			
 			// If we can't, then get out of here
-			if ( isset( $create_matching_profile ) && ! $create_matching_profile )
+			if ( isset( $create_matching_profile ) && ! $create_matching_profile ) {
 				return false;
+			}
 
 			// Otherwise, set up a new account
 			
@@ -513,15 +530,17 @@ class UA_myBama_CAS_Auth {
 			}
 			
 			// If we have a last name, add it
-			if ( $user_last_name = $this->get_user_attribute( 'lastname' ) )
+			if ( $user_last_name = $this->get_user_attribute( 'lastname' ) ) {
 				$user_data[ 'last_name' ] = $user_last_name;
+			}
 				
 			// Create display name
 			$user_display_name = isset( $user_first_name ) && ! empty( $user_first_name ) ? $user_first_name : NULL;
 					
 			// If we have a last name, add it
-			if ( isset( $user_last_name ) && ! empty( $user_last_name ) )
+			if ( isset( $user_last_name ) && ! empty( $user_last_name ) ) {
 				$user_display_name .= " {$user_last_name}";
+			}
 				
 			// Add display name
 			$user_data[ 'display_name' ] = isset( $user_display_name ) && ! empty( $user_display_name ) ? $user_display_name : $username;
@@ -577,20 +596,24 @@ class UA_myBama_CAS_Auth {
 	public function authenticate_wp_username_password( $authenticate, $wp_username, $wp_password ) {
 		
 		// Only do for front end
-		if ( is_admin() )
+		if ( is_admin() ) {
 			return;
+		}
 			
 		// Make sure single sign-on is enabled
-		if ( ! $this->is_single_sign_on() )
+		if ( ! $this->is_single_sign_on() ) {
 			return $authenticate;
+		}
 			
 		// Make sure they are authenticated
-		if ( ! $this->is_authenticated() )
+		if ( ! $this->is_authenticated() ) {
 			return $authenticate;
+		}
 			
 		// Make sure we have a user
-		if ( ! ( $mybama_username = $this->get_username() ) )
+		if ( ! ( $mybama_username = $this->get_username() ) ) {
 			return $authenticate;
+		}
 			
 		// If user names match, and we have the user, then approve the authentication
 		if ( $mybama_username === $wp_username
@@ -623,8 +646,10 @@ class UA_myBama_CAS_Auth {
 			
 			$redirect_to = $_GET[ 'redirect_to' ];
 		
+		}
+
 		// Otherwise set the current URL
-		} else if ( $current_url = $this->get_current_url() ) {
+		else if ( $current_url = $this->get_current_url() ) {
 			
 			// Set the "redirect_to" to the current URL
 			$redirect_to = $current_url;
@@ -699,8 +724,9 @@ class UA_myBama_CAS_Auth {
 	public function check_for_user_requested_login() {
 		
 		// Only do for front end
-		if ( is_admin() )
+		if ( is_admin() ) {
 			return;
+		}
 		
 		// If the user is requesting to sign via the 'ua-mybama-cas-auth-login' parameter...
 		if ( isset( $_GET ) && isset( $_GET[ 'ua-mybama-cas-auth-login' ] )
@@ -710,8 +736,9 @@ class UA_myBama_CAS_Auth {
 			if ( $this->is_authenticated() ) {
 				
 				// If single sign-on is enabled, try to sign them into WordPress
-				if ( $this->is_single_sign_on() )
+				if ( $this->is_single_sign_on() ) {
 					$this->sign_user_into_wordpress();
+				}
 				
 				// Create our redirect URL
 				$redirect_url = NULL;
@@ -721,8 +748,10 @@ class UA_myBama_CAS_Auth {
 					
 					$redirect_url = $_GET[ 'redirect_to' ];
 				
+				}
+
 				// Otherwise, set the current URL
-				} else {
+				else {
 				
 					// Create redirect URL
 					$redirect_url = $this->get_current_url();
@@ -734,9 +763,7 @@ class UA_myBama_CAS_Auth {
 					
 					// If redirect URL = the login page, then redirect to the admin
 					if ( $redirect_url == wp_login_url() ) {
-						
 						$redirect_url = admin_url();
-						
 					}
 					
 					// Make sure the 'ua-mybama-cas-auth-login' is removed
@@ -770,8 +797,9 @@ class UA_myBama_CAS_Auth {
 	public function check_for_user_requested_logout() {
 		
 		// Only do for front end
-		if ( is_admin() )
+		if ( is_admin() ) {
 			return;
+		}
 		
 		// If the user is requesting to logout via the 'ua-mybama-cas-auth-logout' parameter...
 		if ( isset( $_GET ) && isset( $_GET[ 'ua-mybama-cas-auth-logout' ] )
@@ -783,8 +811,10 @@ class UA_myBama_CAS_Auth {
 				// Log them out of WordPress (which logs them out of CAS)
 				wp_logout();
 				
+			}
+
 			// Otherwise, only log them out of CAS
-			} else {
+			else {
 			
 				// Log them out!
 				$this->logout();
@@ -811,8 +841,9 @@ class UA_myBama_CAS_Auth {
 	function logout( $redirect_url = NULL ) {
 		
 		// Make sure the client is initialized
-		if ( ! $this->initialize_client() )
+		if ( ! $this->initialize_client() ) {
 			return;
+		}
 		
 		// If a redirect URL wasn't passed...
 		if ( ! ( isset( $redirect_url ) && ! empty( $redirect_url ) ) ) {
@@ -825,8 +856,10 @@ class UA_myBama_CAS_Auth {
 				
 				$redirect_url = $_GET[ 'redirect_to' ];
 			
+			}
+
 			// Otherwise, set the current URL
-			} else {
+			else {
 			
 				// Create redirect URL
 				$redirect_url = $this->get_current_url();
@@ -842,17 +875,19 @@ class UA_myBama_CAS_Auth {
 		}
 		
 		// If we failed a new authentication, add a parameter
-		if ( isset( $this->failed_new_authentication ) && $this->failed_new_authentication )
+		if ( isset( $this->failed_new_authentication ) && $this->failed_new_authentication ) {
 			$redirect_url = add_query_arg( apply_filters( 'ua_mybama_cas_auth_failed_new_authentication_query_arg', 'login-error' ), 1, $redirect_url );
+		}
 			
 		// Only need to logout if authenticated
 		if ( $this->is_authenticated() ) {
 			
 			// If we have a redirect	
-			if ( isset( $redirect_url ) && ! empty( $redirect_url ) )
+			if ( isset( $redirect_url ) && ! empty( $redirect_url ) ) {
 				phpCAS::logoutWithRedirectService( $redirect_url );
-			else
+			} else {
 				phpCAS::logout();
+			}
 			
 		}
 		
@@ -877,8 +912,9 @@ class UA_myBama_CAS_Auth {
 	public function is_authenticated() {
 		
 		// Make sure the client is initialized
-		if ( $this->initialize_client() )
+		if ( $this->initialize_client() ) {
 			return phpCAS::isAuthenticated();
+		}
 		
 		return false;
 		
@@ -892,8 +928,9 @@ class UA_myBama_CAS_Auth {
 	public function force_authentication() {
 		
 		// No need if they're already authenticated
-		if ( $this->is_authenticated() )
+		if ( $this->is_authenticated() ) {
 			return;
+		}
 			
 		// Make sure the client is initialized
 		if ( $this->initialize_client() ) {
@@ -916,8 +953,9 @@ class UA_myBama_CAS_Auth {
 	public function initialize_client() {
 		
 		// No need to run if the client has already been setup
-		if ( isset( $this->client_is_initialized ) && $this->client_is_initialized === true )
+		if ( isset( $this->client_is_initialized ) && $this->client_is_initialized === true ) {
 			return true;
+		}
 		
 		// Extract our settings
 		extract( $this->get_settings(), EXTR_OVERWRITE );
@@ -933,8 +971,9 @@ class UA_myBama_CAS_Auth {
 		$cas_context = $this->get_cas_context();
 		
 		// @TODO setup/test errors for if we don't have server info or if it doesn't work
-		if ( ! $cas_host || ! $cas_context )
+		if ( ! $cas_host || ! $cas_context ) {
 			return false;
+		}
 		
 		// Initialize phpCAS
 		phpCAS::client( SAML_VERSION_1_1, $cas_host, 443, $cas_context );
@@ -943,15 +982,13 @@ class UA_myBama_CAS_Auth {
 		// THIS SETTING IS NOT RECOMMENDED FOR PRODUCTION.
 		// VALIDATING THE CAS SERVER IS CRUCIAL TO THE SECURITY OF THE CAS PROTOCOL!
 		if ( $in_test_mode ) {
-			
 			phpCAS::setNoCasServerValidation();
-		
+		}
+
 		// For production use set the CA certificate that is the issuer of the cert
-		// on the CAS server and uncomment the line below	
-		} else {
-			
+		// on the CAS server and uncomment the line below
+		else {
 			phpCAS::setCasServerCACert( plugin_dir_path( dirname( __FILE__ ) ) . 'includes/ua-cas.pem' );
-			
 		}
 		
 		// Consider the client initialized!
@@ -971,8 +1008,9 @@ class UA_myBama_CAS_Auth {
 	public function is_single_sign_on() {
 		
 		// No need if it's already set
-		if ( isset( $this->is_single_sign_on ) )
+		if ( isset( $this->is_single_sign_on ) ) {
 			return $this->is_single_sign_on;
+		}
 			
 		// Extract our settings
 		extract( $this->get_settings(), EXTR_OVERWRITE );
@@ -994,8 +1032,9 @@ class UA_myBama_CAS_Auth {
 	public function is_in_test_mode() {
 		
 		// No need if it's already set
-		if ( isset( $this->in_test_mode ) )
+		if ( isset( $this->in_test_mode ) ) {
 			return $this->in_test_mode;
+		}
 			
 		// Extract our settings
 		extract( $this->get_settings(), EXTR_OVERWRITE );
@@ -1026,8 +1065,10 @@ class UA_myBama_CAS_Auth {
 				
 				return $login_whitelist;
 			
+			}
+
 			// Otherwise, handle a string
-			} else if ( is_string( $login_whitelist ) ) {
+			else if ( is_string( $login_whitelist ) ) {
 			
 				// Explode into an array, separated by new lines
 				$login_whitelist = explode( "\n", $login_whitelist );
@@ -1064,8 +1105,10 @@ class UA_myBama_CAS_Auth {
 				
 				return $login_blacklist;
 			
+			}
+
 			// Otherwise, handle a string
-			} else if ( is_string( $login_blacklist ) ) {
+			else if ( is_string( $login_blacklist ) ) {
 			
 				// Explode into an array, separated by new lines
 				$login_blacklist = explode( "\n", $login_blacklist );
@@ -1101,8 +1144,10 @@ class UA_myBama_CAS_Auth {
 				
 				return $username_whitelist;
 			
+			}
+
 			// Otherwise, handle a string
-			} else if ( is_string( $username_whitelist ) ) {
+			else if ( is_string( $username_whitelist ) ) {
 				
 				// Explode into an array, separated by new lines
 				$username_whitelist = explode( "\n", $username_whitelist );
@@ -1138,8 +1183,10 @@ class UA_myBama_CAS_Auth {
 				
 				return $username_blacklist;
 			
+			}
+
 			// Otherwise, handle a string
-			} else if ( is_string( $username_blacklist ) ) {
+			else if ( is_string( $username_blacklist ) ) {
 			
 				// Explode into an array, separated by new lines
 				$username_blacklist = explode( "\n", $username_blacklist );
@@ -1168,12 +1215,14 @@ class UA_myBama_CAS_Auth {
 	public function get_setting( $key ) {
 		
 		// Make sure we have settings
-		if ( ! ( $settings = $this->get_settings() ) )
-			return NULL;
+		if ( ! ( $settings = $this->get_settings() ) ) {
+			return null;
+		}
 			
 		// Make sure this key exists
-		if ( array_key_exists( $key, $settings ) )
+		if ( array_key_exists( $key, $settings ) ) {
 			return $settings[ $key ];
+		}
 			
 		return NULL;
 		
@@ -1187,8 +1236,9 @@ class UA_myBama_CAS_Auth {
 	public function get_settings() {
 		
 		// No need if they're already set
-		if ( isset( $this->settings ) && ! empty( $this->settings ) )
+		if ( isset( $this->settings ) && ! empty( $this->settings ) ) {
 			return $this->settings;
+		}
 		
 		// Get the saved settings
 		$saved_settings = get_option( 'ua_mybama_cas_auth_settings', array() );
@@ -1253,8 +1303,10 @@ class UA_myBama_CAS_Auth {
 			
 			return $cas_test_host_address;
 		
-		// Otherwise, get production info...	
-		} else if ( ( $cas_production_host_address = $this->get_setting( 'cas_production_host_address' ) )
+		}
+
+		// Otherwise, get production info...
+		else if ( ( $cas_production_host_address = $this->get_setting( 'cas_production_host_address' ) )
 			&& ! empty( $cas_production_host_address ) ) {
 			
 			return $cas_production_host_address;
@@ -1280,8 +1332,10 @@ class UA_myBama_CAS_Auth {
 			
 			return $cas_test_context;
 		
-		// Otherwise, get production info...	
-		} else if ( ( $cas_production_context = $this->get_setting( 'cas_production_context' ) )
+		}
+
+		// Otherwise, get production info...
+		else if ( ( $cas_production_context = $this->get_setting( 'cas_production_context' ) )
 			&& ! empty( $cas_production_context ) ) {
 			
 			return $cas_production_context;
@@ -1364,8 +1418,9 @@ class UA_myBama_CAS_Auth {
 	private function define_admin_hooks() {
 
 		// We only need these hooks in the admin
-		if ( ! is_admin() )
+		if ( ! is_admin() ) {
 			return;
+		}
 
 		// Load our updater class
 		$plugin_updater = new UA_myBama_CAS_Auth_Updater( $this->get_plugin_id(), $this->get_plugin_file(), $this->get_version() );
