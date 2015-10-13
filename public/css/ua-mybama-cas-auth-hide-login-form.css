@@ -1,26 +1,33 @@
 /* If set, will hide the login form so you can only see the "Login through myBama" button */
 #loginform {
+	background: none;
 	padding: 0;
-	}
+}
 
 /* Hide specific elements */
 #loginform p {
 	display: none !important;
 	visibility: hidden !important;
-	}
+}
 	
 /* Tweak the button a little */
-#ua-mybama-cas-auth-login-form-mybama-button {
+.ua-mybama-cas-auth-login-through-button {
 	margin: 0;
-	}
+}
+
+/* Hide the "Login through WordPress button */
+#ua-mybama-cas-auth-login-through-wp-button {
+	display: none !important;
+	visibility: hidden !important;
+}
 	
 /* Center the nav */
 #nav,
 #backtoblog {
 	text-align: center;
-	}
+}
 	
 /* Decrease the space above the back to blog link */
 #backtoblog {
 	margin: 14px 0 0 0;
-	}
+}

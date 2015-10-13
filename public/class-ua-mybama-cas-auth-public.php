@@ -69,8 +69,9 @@ class UA_myBama_CAS_Auth_Public {
 		global $ua_mybama_cas_auth;
 		
 		// Only do for front end
-		if ( is_admin() )
+		if ( is_admin() ) {
 			return;
+		}
 			
 		// Initialize the client
 		$ua_mybama_cas_auth->initialize_client();
@@ -86,29 +87,39 @@ class UA_myBama_CAS_Auth_Public {
 		global $ua_mybama_cas_auth;
 		
 		// Only add if single sign-on is enabled
-		if ( ! $ua_mybama_cas_auth->is_single_sign_on() )
+		if ( ! $ua_mybama_cas_auth->is_single_sign_on() ) {
 			return;
+		}
 			
 		// Make sure the client is initialized
-		if ( ! $ua_mybama_cas_auth->initialize_client() )
+		if ( ! $ua_mybama_cas_auth->initialize_client() ) {
 			return;
+		}
 			
 		// Get the setting
 		$add_button = $ua_mybama_cas_auth->get_setting( 'sso_add_mybama_button_to_login_form' );
 		
 		// Only add if the setting is enabled
-		if ( isset( $add_button ) && ! $add_button )
+		if ( isset( $add_button ) && ! $add_button ) {
 			return;
+		}
 		
-		// Enqueue the login stylesheet
+		// Enqueue the login stylesheet and script
 		wp_enqueue_style( "{$this->plugin_id}-login", plugin_dir_url( dirname( __FILE__ ) ) . 'public/css/ua-mybama-cas-auth-login.css', array(), $this->version, 'all' );
+		wp_enqueue_script( "{$this->plugin_id}-login", plugin_dir_url( dirname( __FILE__ ) ) . 'public/js/ua-mybama-cas-auth-login.js', array( 'jquery' ), $this->version );
+
+		// Pass login URL to the script
+		wp_localize_script( "{$this->plugin_id}-login", 'ua_mybama_cas_auth', array(
+			'login_mybama_url' => $ua_mybama_cas_auth->get_login_url()
+		));
 		
 		// Get the setting
 		$hide_wp_login_form = $ua_mybama_cas_auth->get_setting( 'sso_hide_wordpress_login_form' );
 		
 		// Only add if the setting is enabled
-		if ( isset( $hide_wp_login_form ) && ! $hide_wp_login_form )
+		if ( isset( $hide_wp_login_form ) && ! $hide_wp_login_form ) {
 			return;
+		}
 			
 		// Enqueue the stylesheet that hides the WordPress login elements
 		wp_enqueue_style( "{$this->plugin_id}-hide-login-form", plugin_dir_url( dirname( __FILE__ ) ) . 'public/css/ua-mybama-cas-auth-hide-login-form.css', array(), $this->version, 'all' );
@@ -125,24 +136,28 @@ class UA_myBama_CAS_Auth_Public {
 	 * @since   1.0
 	 * @param 	string - $lostpassword_url The lost password page URL.
 	 * @param 	string - $redirect         The path to redirect to on login.
+	 * @return  string - the URL
 	 */
 	public function filter_lostpassword_url( $lostpassword_url, $redirect ) {
 		global $ua_mybama_cas_auth;
 		
 		// Only filter if single sign-on is enabled
-		if ( ! $ua_mybama_cas_auth->is_single_sign_on() )
+		if ( ! $ua_mybama_cas_auth->is_single_sign_on() ) {
 			return $lostpassword_url;
+		}
 			
 		// Make sure the client is initialized
-		if ( ! $ua_mybama_cas_auth->initialize_client() )
+		if ( ! $ua_mybama_cas_auth->initialize_client() ) {
 			return $lostpassword_url;
+		}
 			
 		// Get the setting
 		$hide_wp_login_form = $ua_mybama_cas_auth->get_setting( 'sso_hide_wordpress_login_form' );
 		
 		// Only filter if the setting is enabled
-		if ( isset( $hide_wp_login_form ) && ! $hide_wp_login_form )
+		if ( isset( $hide_wp_login_form ) && ! $hide_wp_login_form ) {
 			return $lostpassword_url;
+		}
 		
 		// Return the link to the myBama lost password form
 		return 'http://oit.ua.edu/oit/services/it-service-desk/mybama-account-info/mybama-account-setup/';
@@ -158,26 +173,32 @@ class UA_myBama_CAS_Auth_Public {
 		global $ua_mybama_cas_auth;
 		
 		// Only add if single sign-on is enabled
-		if ( ! $ua_mybama_cas_auth->is_single_sign_on() )
+		if ( ! $ua_mybama_cas_auth->is_single_sign_on() ) {
 			return;
+		}
 			
 		// Make sure the client is initialized
-		if ( ! $ua_mybama_cas_auth->initialize_client() )
+		if ( ! $ua_mybama_cas_auth->initialize_client() ) {
 			return;
+		}
 			
 		// Get the setting
 		$add_button = $ua_mybama_cas_auth->get_setting( 'sso_add_mybama_button_to_login_form' );
 		
 		// Only add if the setting is enabled
-		if ( isset( $add_button ) && ! $add_button )
+		if ( isset( $add_button ) && ! $add_button ) {
 			return;
+		}
 			
 		// Get the login URL
 		if ( $login_url = $ua_mybama_cas_auth->get_login_url() ) {
 			
-			?><a id="ua-mybama-cas-auth-login-form-mybama-button" class="button button-large button-secondary" href="<?php echo $login_url; ?>">Login through myBama</a><?php
+			?><a id="ua-mybama-cas-auth-login-through-mybama-button" class="ua-mybama-cas-auth-login-through-button button button-large button-secondary" href="<?php echo $login_url; ?>">Login through myBama</a><?php
 			
 		}
+
+		// Give them the option to login through WordPress or myBama
+		?><a id="ua-mybama-cas-auth-login-through-wp-button" class="ua-mybama-cas-auth-login-through-button button button-large button-secondary" href="#">Login through WordPress</a><?php
 		
 	}
 	
@@ -192,20 +213,24 @@ class UA_myBama_CAS_Auth_Public {
 		global $ua_mybama_cas_auth, $post;
 			
 		// Only do for front end
-		if ( is_admin() )
+		if ( is_admin() ) {
 			return;
+		}
 		
 		// Make sure we're viewing a single post and have a post ID
-		if ( ! is_singular() || ( is_singular() && ! ( isset( $post ) && isset( $post->ID ) && $post->ID > 0 ) ) )
+		if ( ! is_singular() || ( is_singular() && ! ( isset( $post ) && isset( $post->ID ) && $post->ID > 0 ) ) ) {
 			return;
+		}
 		
 		// Does this page require authentication?
-		if ( ! ( $requires_authentication = get_post_meta( $post->ID, '_requires_mybama_authentication', true ) ) )
+		if ( ! ( $requires_authentication = get_post_meta( $post->ID, '_requires_mybama_authentication', true ) ) ) {
 			return;
+		}
 	
 		// If it doesn't require authentication for the entire page, get out of here. We're not needed.
-		if ( ! ( isset( $requires_authentication ) && 'yes_for_page' == $requires_authentication ) )
+		if ( ! ( isset( $requires_authentication ) && 'yes_for_page' == $requires_authentication ) ) {
 			return;
+		}
 		
 		// It does, so force authentication
 		$ua_mybama_cas_auth->force_authentication();
@@ -223,24 +248,29 @@ class UA_myBama_CAS_Auth_Public {
 		global $post;
 		
 		// Only do for front end
-		if ( is_admin() )
+		if ( is_admin() ) {
 			return;
+		}
 		
 		// Make sure we're viewing a single post and have a post ID
-		if ( ! is_singular() || ( is_singular() && ! ( isset( $post ) && isset( $post->ID ) && $post->ID > 0 ) ) )
+		if ( ! is_singular() || ( is_singular() && ! ( isset( $post ) && isset( $post->ID ) && $post->ID > 0 ) ) ) {
 			return;
+		}
 		
 		// Does this page require authentication?
-		if ( ! ( $requires_authentication = get_post_meta( $post->ID, '_requires_wordpress_authentication', true ) ) )
+		if ( ! ( $requires_authentication = get_post_meta( $post->ID, '_requires_wordpress_authentication', true ) ) ) {
 			return;
+		}
 	
 		// If it doesn't require authentication for the entire page, get out of here. We're not needed.
-		if ( ! ( isset( $requires_authentication ) && 'yes_for_page' == $requires_authentication ) )
+		if ( ! ( isset( $requires_authentication ) && 'yes_for_page' == $requires_authentication ) ) {
 			return;
+		}
 		
 		// If user isn't logged in, so force authentication
-		if ( ! is_user_logged_in() )
+		if ( ! is_user_logged_in() ) {
 			auth_redirect();
+		}
 		
 	}
 	
@@ -250,29 +280,35 @@ class UA_myBama_CAS_Auth_Public {
 	 *
 	 * @since   1.0
 	 * @param	string - the content we're filtering and possibly hiding
+	 * @return  content or informative message
 	 */
 	public function check_if_post_requires_mybama_authentication_for_content( $content ) {
 		global $ua_mybama_cas_auth, $post;
 		
 		// Only do for front end
-		if ( is_admin() )
+		if ( is_admin() ) {
 			return;
+		}
 			
 		// Make sure we have a post ID
-		if ( ! ( isset( $post ) && isset( $post->ID ) && $post->ID > 0 ) )
+		if ( ! ( isset( $post ) && isset( $post->ID ) && $post->ID > 0 ) ) {
 			return $content;
+		}
 		
 		// Does this page require authentication?
-		if ( ! ( $requires_authentication = get_post_meta( $post->ID, '_requires_mybama_authentication', true ) ) )
+		if ( ! ( $requires_authentication = get_post_meta( $post->ID, '_requires_mybama_authentication', true ) ) ) {
 			return $content;
+		}
 			
 		// If it doesn't require authentication for the content, get out of here. We're not needed.
-		if ( ! ( isset( $requires_authentication ) && 'yes_for_content' == $requires_authentication ) )
+		if ( ! ( isset( $requires_authentication ) && 'yes_for_content' == $requires_authentication ) ) {
 			return $content;
+		}
 			
 		// If authenticated, then we're all good
-		if ( $ua_mybama_cas_auth->is_authenticated() )
+		if ( $ua_mybama_cas_auth->is_authenticated() ) {
 			return $content;
+		}
 			
 		// @TODO setup message with link to login and run it through a filter.
 		return 'This content requires myBama authentication.';
@@ -285,29 +321,35 @@ class UA_myBama_CAS_Auth_Public {
 	 *
 	 * @since   1.0
 	 * @param	string - the content we're filtering and possibly hiding
+	 * @return  content or informative message
 	 */
 	public function check_if_post_requires_wordpress_authentication_for_content( $content ) {
 		global $post;
 		
 		// Only do for front end
-		if ( is_admin() )
+		if ( is_admin() ) {
 			return;
+		}
 			
 		// Make sure we have a post ID
-		if ( ! ( isset( $post ) && isset( $post->ID ) && $post->ID > 0 ) )
+		if ( ! ( isset( $post ) && isset( $post->ID ) && $post->ID > 0 ) ) {
 			return $content;
+		}
 		
 		// Does this page require authentication?
-		if ( ! ( $requires_authentication = get_post_meta( $post->ID, '_requires_wordpress_authentication', true ) ) )
+		if ( ! ( $requires_authentication = get_post_meta( $post->ID, '_requires_wordpress_authentication', true ) ) ) {
 			return $content;
+		}
 			
 		// If it doesn't require authentication for the content, get out of here. We're not needed.
-		if ( ! ( isset( $requires_authentication ) && 'yes_for_content' == $requires_authentication ) )
+		if ( ! ( isset( $requires_authentication ) && 'yes_for_content' == $requires_authentication ) ) {
 			return $content;
+		}
 			
 		// If authenticated, then we're all good
-		if ( is_user_logged_in() )
+		if ( is_user_logged_in() ) {
 			return $content;
+		}
 			
 		// @TODO setup message with link to login and run it through a filter.
 		return 'This content requires WordPress authentication.';		
@@ -323,7 +365,6 @@ class UA_myBama_CAS_Auth_Public {
 	public function filter_the_excerpt( $excerpt ) {
 		
 		// @TODO setup custom search excerpt? - work with 'no_with_custom_excerpt' post meta
-		
 		return $excerpt;
 		
 	}
@@ -339,8 +380,9 @@ class UA_myBama_CAS_Auth_Public {
 		global $ua_mybama_cas_auth, $wpdb;
 		
 		// Not in the admin
-		if ( is_admin() )
+		if ( is_admin() ) {
 			return $clauses;
+		}
 		
 		// If we're running a search
 		if ( $query->is_search() ) {
@@ -352,8 +394,9 @@ class UA_myBama_CAS_Auth_Public {
 			$is_logged_in = is_user_logged_in();
 			
 			// GROUP BY post ID to clear up duplicates
-			if ( ! $is_authenticated || ! $is_logged_in )
+			if ( ! $is_authenticated || ! $is_logged_in ) {
 				$clauses[ 'groupby' ] = "{$wpdb->posts}.ID";
+			}
 			
 			// If not authenticated, then we need to run the authenticated check
 			if ( ! $is_authenticated ) {

@@ -1,8 +1,24 @@
-/* Style the login through myBama button on the login form */
-#ua-mybama-cas-auth-login-form-mybama-button {
+/* Tweak the form */
+#loginform {
+	padding-bottom: 30px;
+}
+
+/* Hide specific elements */
+#loginform p {
+	display: none !important;
+	visibility: hidden !important;
+}
+
+/* When wanting to login through WordPress, change it up */
+#loginform.login-through-wp p {
+	display: block !important;
+	visibility: visible !important;
+}
+
+/* Style the "login with" buttons on the login form */
+.ua-mybama-cas-auth-login-through-button {
 	display: block;
 	background: #900;
-	background-repeat: no-repeat;
 	width: 100%;
 	height: auto;
 	-moz-box-sizing: border-box;
@@ -13,7 +29,7 @@
 	border-radius: 5px;
 	box-shadow: none;
 	border: 0;
-	margin: 0 0 20px 0;
+	margin: 0;
 	padding: 8px 12px;
 	color: #fff;
 	text-align: center;
@@ -24,7 +40,20 @@
 	line-height: 1.3em;
 	vertical-align: middle;
 	}
-	
-#ua-mybama-cas-auth-login-form-mybama-button:hover {
+
+.ua-mybama-cas-auth-login-through-button + .ua-mybama-cas-auth-login-through-button {
+	margin-top: 10px !important;
+}
+
+.ua-mybama-cas-auth-login-through-button:hover {
 	background-color: #750000;
+	color: #fff !important;
 	}
+
+#ua-mybama-cas-auth-login-through-wp-nav {
+	display: block;
+	margin: 5px 0 0 0;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-size: 105%;
+}
