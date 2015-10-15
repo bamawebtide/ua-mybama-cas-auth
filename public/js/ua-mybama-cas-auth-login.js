@@ -9,7 +9,8 @@
         if ( $login_through_wp_button.length > 0 ) {
 
             // When the button is clicked, show the form
-            $login_through_wp_button.on( 'click', function() {
+            $login_through_wp_button.on( 'click', function( $event ) {
+                $event.preventDefault();
 
                 // Add a class to the form so we can change the styles
                 $( '#loginform').addClass( 'login-through-wp' );

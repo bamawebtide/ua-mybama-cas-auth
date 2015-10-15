@@ -16,39 +16,33 @@
 }
 
 /* Style the "login with" buttons on the login form */
-.ua-mybama-cas-auth-login-through-button {
+.wp-core-ui .ua-mybama-cas-auth-login-through-button {
 	display: block;
-	background: #900;
+	float: none;
+	clear: both;
 	width: 100%;
-	height: auto;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
-	box-shadow: none;
-	border: 0;
-	margin: 0;
-	padding: 8px 12px;
-	color: #fff;
 	text-align: center;
+	margin: 0;
+}
+
+.wp-core-ui .ua-mybama-cas-auth-login-through-button.button-primary {
+	background: #900;
+	color: #fff;
+	border: 0;
 	font-weight: bold;
-	text-decoration: none;
-	cursor: pointer;
-	font-size: 1.1em;
-	line-height: 1.3em;
-	vertical-align: middle;
-	}
+	height: auto;
+	line-height: 1;
+	padding: 12px;
+}
+
+.wp-core-ui .ua-mybama-cas-auth-login-through-button.button-primary:hover {
+	background: #750000;
+	color: #fff;
+}
 
 .ua-mybama-cas-auth-login-through-button + .ua-mybama-cas-auth-login-through-button {
 	margin-top: 10px !important;
 }
-
-.ua-mybama-cas-auth-login-through-button:hover {
-	background-color: #750000;
-	color: #fff !important;
-	}
 
 #ua-mybama-cas-auth-login-through-wp-nav {
 	display: block;

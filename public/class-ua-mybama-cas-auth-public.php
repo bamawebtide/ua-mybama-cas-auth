@@ -193,12 +193,12 @@ class UA_myBama_CAS_Auth_Public {
 		// Get the login URL
 		if ( $login_url = $ua_mybama_cas_auth->get_login_url() ) {
 			
-			?><a id="ua-mybama-cas-auth-login-through-mybama-button" class="ua-mybama-cas-auth-login-through-button button button-large button-secondary" href="<?php echo $login_url; ?>">Login through myBama</a><?php
+			?><a id="ua-mybama-cas-auth-login-through-mybama-button" class="button button-large button-primary ua-mybama-cas-auth-login-through-button" href="<?php echo $login_url; ?>">Login through myBama</a><?php
 			
 		}
 
 		// Give them the option to login through WordPress or myBama
-		?><a id="ua-mybama-cas-auth-login-through-wp-button" class="ua-mybama-cas-auth-login-through-button button button-large button-secondary" href="#">Login through WordPress</a><?php
+		?><a id="ua-mybama-cas-auth-login-through-wp-button" class="button button-large button-secondary ua-mybama-cas-auth-login-through-button" href="#">Login through WordPress</a><?php
 		
 	}
 	
